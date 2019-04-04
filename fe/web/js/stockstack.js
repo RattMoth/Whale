@@ -168,7 +168,7 @@ function loadTemplates() {
 function get(url, cb) {
   var http = new XMLHttpRequest();
 
-  http.open('GET', 'http://localhost:4001/' + url, true);
+  http.open('GET', 'http://' + document.location.host + ':4001/' + url, true);
   http.setRequestHeader('Content-type', 'application/json');
 
   http.onreadystatechange = function() {

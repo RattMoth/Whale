@@ -45,7 +45,7 @@ def showError(what):
 
 def getInstrument(url):
   key = url.split('/')[-2]
-  res = r.hget('inst', key)
+  res = r.hget('inst', key).decode("utf-8") 
   if not res:
     req  = urllib.request.Request(url) 
 
