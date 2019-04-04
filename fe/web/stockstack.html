@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Germania+One" rel="stylesheet">
+    <title>Stockpile! The fun stock picking game</title>
+    <link rel="stylesheet" href="css/style.css"> 
+  </head>
+  <body>
+    <div class="stack">
+      <h2>&#x1F5D1; Trash</h2>
+      <h3>0%</h3>
+      <ul id="trash">
+      </ul>
+    </div>
+
+    <div id="game">
+      <h2>Which will do better?</h2>
+
+      <div id="choice-container">
+      </div>
+
+    </div>
+
+    <div class="stack">
+      <h2>&#x1F4B0; Stash</h2>
+      <h3>0%</h3>
+      <ul id="stash">
+      </ul>
+    </div>
+
+    <div id='template'>
+      <script id='t-choice' type='text/template'>
+        <div class='choice' onclick="choose(<%= ix %>, 0)">
+          <h3><%= choice[0][1] %></h3>
+          <h4><%= choice[0][0] %></h4>
+        </div>
+
+        <div class='choice' onclick="choose(<%= ix %>, 1)">
+          <h3><%= choice[1][1] %></h3>
+          <h4><%= choice[1][0] %></h4>
+        </div>
+      </script>
+
+      <script id='t-stack' type='text/template'>
+        <li>
+          <div class="performance <%= item[0] %>"></div>
+          <h3><%= item[1] %></h3>
+          <h4><%= item[0] %></h4>
+        </li>
+      </script>
+      
+      <script id='t-endgame' type='text/template'>
+        <h3>Let's see how you do!</h3>
+      </script>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src=https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js></script>
+    <script src=js/evda.min.js></script>
+    <script src=js/stockstack.js></script>
+
+  </body>
+</html>

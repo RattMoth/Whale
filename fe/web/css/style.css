@@ -1,0 +1,65 @@
+body {
+  background: white;
+  text-align: center;
+  color: black;
+  font-family: 'Germania One', cursive;
+}
+
+h1,h2,h3,h4 {
+  margin: 0;
+}
+h3 {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+h4 {
+  opacity: 0.8;
+  font-weight: 300;
+}
+.stack {
+  text-align: left;
+  width: 20%;
+}
+.stack .performance {
+  float: left;
+  width: 3rem;
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 10px 0;
+}
+#game {
+  width: 60%;
+  text-align: center;
+}
+#game h2 {
+  margin: 2rem 0;
+  font-size: 2rem;
+}
+.choice {
+  width: 15rem;
+  padding: 7rem 1rem;
+  margin: 0 1rem;
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid black;
+}
+.choice:hover {
+  background: #ccc;
+}
+.stack, #game {
+  float: left;
+}
+.stack h2 {
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+.stack ul {
+  margin: 0;
+  padding: 0;
+}
+.stack li {
+  list-style: none;
+  border: 1px solid black;
+  padding: 0.5rem;
+}
