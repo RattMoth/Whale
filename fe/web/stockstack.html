@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="https://fonts.googleapis.com/css?family=Germania+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
     <title>Stockpile! The fun stock picking game</title>
     <link rel="stylesheet" href="css/style.css"> 
   </head>
@@ -18,11 +18,9 @@
     </div>
 
     <div id="game">
-      <h2>Which will do better?</h2>
-
+      <h2>Which stock do you think did better today?</h2>
       <div id="choice-container">
       </div>
-
     </div>
 
     <div class="stack-container">
@@ -37,19 +35,28 @@
     <div id='template'>
       <script id='t-choice' type='text/template'>
         <div class='choice' onclick="choose(<%= ix %>, 0)">
+          <div class='body'>
           <h3><%= choice[0][1] %></h3>
-          <h4><%= choice[0][0] %></h4>
+          </div>
         </div>
 
         <div class='choice' onclick="choose(<%= ix %>, 1)">
+          <div class='body'>
           <h3><%= choice[1][1] %></h3>
-          <h4><%= choice[1][0] %></h4>
+          </div>
         </div>
       </script>
 
       <script id='t-stack' type='text/template'>
         <li>
-          <div class="performance <%= item[0] %>">?</div>
+          <div class="perf-container <%= item[0] %>">
+            <div class="fish"></div>
+            <div class="waves">
+              <img src=waves_110.png>
+              <div class="ocean"></div>
+            </div>
+            <div class="performance <%= item[0] %>">?</div>
+          </div>
           <h3><%= item[1] %></h3>
           <h4><%= item[0] %></h4>
         </li>

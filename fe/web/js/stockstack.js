@@ -28,18 +28,19 @@ function whoami() {
 
 function render() {
   var list = [];
-  $("#trash").html(
-    trash.map(function(row) {
-      list.push(row[0]);
-      return Template.stack({item: row});
-    }).join(''));
-
-  $("#stash").html(
-    stash.map(function(row) {
-      list.push(row[0]);
-      return Template.stack({item: row});
-    }).join(''));
-
+  trash.forEach(function(row) {
+    if(!row.rendered) {
+      row.rendered = true;
+      $("#trash").prepend(Template.stack({item: row}));
+    }
+  });
+      
+  stash.forEach(function(row) {
+    if(!row.rendered) {
+      row.rendered = true;
+      $("#stash").prepend(Template.stack({item: row}));
+    }
+  });
 
 }
 
@@ -100,9 +101,20 @@ function endGame() {
   $("#choice-container").html(
     Template.endgame()
   );
+  let max = Math.max.apply(0, Object.values(HistoricalMap).map(a => a[2]));
+  let min = Math.min.apply(0, Object.values(HistoricalMap).map(a => a[2]));
+
   for(var ticker in HistoricalMap) {
+    let change = HistoricalMap[ticker][2];
     $(".performance." + ticker).html(relative_percent(HistoricalMap[ticker][2]));
+
+    let perc = 100 * (max - change) / (max - min);
+    console.log(change, perc, max, min);
+    $(".perf-container." + ticker + ' .waves').css('height', perc + '%');
+    $(".perf-container." + ticker + ' .performance').css('bottom', .15 + .7 * perc + '%');
   }
+
+
   let stashTotal = stash.reduce(function(ix, row) {
     return (1 - HistoricalMap[row[0]][2]) + ix;
   }, 0);
@@ -112,7 +124,6 @@ function endGame() {
   doPercent('stash', stashTotal);
   doPercent('trash', trashTotal);
   doPercent('final', stashTotal - trashTotal);
-  console.log(stashTotal);
   Game.over = true;
   return false;
 }
@@ -185,6 +196,6 @@ $(function(){
   getYesterday();
   loadTemplates();
   nextRound();
-  setTimeout(autoplay, 500);
+  //setTimeout(autoplay, 500);
 });
 

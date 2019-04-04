@@ -1,12 +1,13 @@
 body {
-  background: white;
+  background: url('../sand.jpg') repeat;
   text-align: center;
-  color: black;
-  font-family: 'Germania One', cursive;
+  color: #434343;
+  font-family: 'Noto Sans', sans-serif;;
 }
 
 h1,h2,h3,h4 {
   margin: 0;
+  color: #2E3192;
 }
 h3 {
   font-size: 1.8rem;
@@ -26,14 +27,39 @@ h4 {
 }
 .choice {
   width: 15rem;
-  padding: 7rem 1rem;
   margin: 0 1rem;
+  height: 15rem;
+  vertical-align: top;
+  padding: 2rem;
   cursor: pointer;
   display: inline-block;
-  border: 1px solid black;
+  border-radius: 4px;
+  transition: background-color 0.5s ease;
+  box-shadow: 2px 2px 4px 4px rgba(80,80,80,0.3);
+  background: rgba(166, 221, 255, 0.5);
+  border: 2px solid transparent;
+}
+.choice .body {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.choice h3 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+.choice h4 {
+  font-size: 1.85rem;
 }
 .choice:hover {
-  background: #ccc;
+  background: #3FA9F5;
+  border: 2px solid #074674;
+}
+.choice:hover h3,
+.choice:hover h4
+{
+  color: white;
 }
 .stack-container, #game {
   float: left;
@@ -41,13 +67,6 @@ h4 {
 .stack-container {
   text-align: left;
   width: 20%;
-}
-.stack .performance {
-  float: left;
-  width: 7rem;
-  text-align: center;
-  font-size: 1.5rem;
-  padding: 10px 0;
 }
 .stack-container h2 {
   text-align: center;
@@ -57,6 +76,7 @@ h4 {
 .stack-container .header h3 {
   text-align: center;
   margin-bottom: 1rem;
+  font-weight: 800;
 }
 .stack {
   margin: 0;
@@ -64,6 +84,63 @@ h4 {
 }
 .stack li {
   list-style: none;
-  border: 1px solid black;
-  padding: 0.5rem;
+  background: rgba(166, 221, 255, 0.3);
+  border: 1px solid #3FA9F5;
+  padding: 0.75rem;
+  animation: fadein 1s;
+}
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+.perf-container {
+  float: left;
+  width: 7rem;
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 0px 0;
+  height: 4rem;
+  margin-right: 1rem;
+  position: relative;
+}
+.perf-container .performance {
+  position: absolute;
+  bottom: 50%;
+  left: 10%;
+  text-align: center;
+  font-weight: 800;
+  color: #FFF;
+  text-shadow:
+       3px 3px 0 #000,
+     -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+  z-index: 10;
+}
+.fish, .waves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.fish {
+  background: url('../fish_100.png') center center;
+  height: 70%;
+  opacity: 0.5;
+}
+.waves {
+  height: 40%;
+  overflow: hidden;
+  padding-top: 10px;
+}
+.ocean {
+  background: #00a9ff;
+  height: 100%;
+}
+.waves img {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 0;
 }
