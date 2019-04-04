@@ -8,10 +8,12 @@
     <link rel="stylesheet" href="css/style.css"> 
   </head>
   <body>
-    <div class="stack">
-      <h2>&#x1F5D1; Trash</h2>
-      <h3>0%</h3>
-      <ul id="trash">
+    <div class="stack-container">
+      <div class="header">
+        <h2>&#x1F5D1; Trash</h2>
+        <h3 class='performance trash'>?%</h3>
+      </div>
+      <ul id="trash" class="stack">
       </ul>
     </div>
 
@@ -23,10 +25,12 @@
 
     </div>
 
-    <div class="stack">
-      <h2>&#x1F4B0; Stash</h2>
-      <h3>0%</h3>
-      <ul id="stash">
+    <div class="stack-container">
+      <div class="header">
+        <h2>&#x1F4B0; Stash</h2>
+        <h3 class='performance stash'>?%</h3>
+      </div>
+      <ul id="stash" class="stack">
       </ul>
     </div>
 
@@ -45,7 +49,7 @@
 
       <script id='t-stack' type='text/template'>
         <li>
-          <div class="performance <%= item[0] %>"></div>
+          <div class="performance <%= item[0] %>">?</div>
           <h3><%= item[1] %></h3>
           <h4><%= item[0] %></h4>
         </li>
@@ -53,6 +57,7 @@
       
       <script id='t-endgame' type='text/template'>
         <h3>Let's see how you do!</h3>
+        <h2 class="performance final"></h2>
       </script>
     </div>
     

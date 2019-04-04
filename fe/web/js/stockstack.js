@@ -2,6 +2,7 @@ var
   Template = {},
   trash = [], 
   stash = [],
+  HistoricalMap = {},
   Game = {
     round: -1
   },
@@ -39,10 +40,6 @@ function render() {
       return Template.stack({item: row});
     }).join(''));
 
-  console.log(list);
-  list.forEach(function(row) {
-    $(".performance."+ row).html("0%");
-  });
 
 }
 
@@ -71,7 +68,6 @@ function pick(index, which) {
     stash_ix = which,
     trash_ix = (which + 1) % 2;
 
-  console.log(stash_ix, trash_ix);
   stash = add(CompanyList[index][stash_ix], stash); 
   trash = add(CompanyList[index][trash_ix], trash); 
 }
@@ -85,19 +81,52 @@ function save() {
 function reset() {
 }
 
+function relative_percent(what) {
+  let rel = Math.round((1 - what) * 100 * 100);
+  let str = (rel / 100).toFixed(2);
+  if(rel > 0) {
+    str  = '+' + str;
+  }
+  return str + "%";
+}
+
+function doPercent(what, percent) {
+  percent += 1;
+  console.log(what, percent, relative_percent(percent));
+  $(".performance." + what).html(relative_percent(percent));
+}
+
 function endGame() {
   $("#choice-container").html(
     Template.endgame()
   );
+  for(var ticker in HistoricalMap) {
+    $(".performance." + ticker).html(relative_percent(HistoricalMap[ticker][2]));
+  }
+  let stashTotal = stash.reduce(function(ix, row) {
+    return (1 - HistoricalMap[row[0]][2]) + ix;
+  }, 0);
+  let trashTotal = trash.reduce(function(ix, row) {
+    return (1 - HistoricalMap[row[0]][2]) + ix;
+  }, 0);
+  doPercent('stash', stashTotal);
+  doPercent('trash', trashTotal);
+  doPercent('final', stashTotal - trashTotal);
+  console.log(stashTotal);
+  Game.over = true;
+  return false;
 }
 
 function choose(ix, which) {
   pick(ix, which);
-  nextRound();
   render();
+  return nextRound();
 }
 
 function nextRound() {
+  if(Game.over) { 
+    return false;
+  }
   Game.round += 1;
 
   if(Game.round >= CompanyList.length) {
@@ -107,6 +136,14 @@ function nextRound() {
   $("#choice-container").html(
     Template.choice({ix: Game.round, choice: CompanyList[Game.round] })
   );
+  return true;
+}
+
+function autoplay() {
+  function guess() {
+    return Math.round(Math.random());
+  }
+  while( choose(Game.round, guess()) );
 }
 
 function loadTemplates() {
@@ -117,9 +154,37 @@ function loadTemplates() {
   });
 }
 
+function get(url, cb) {
+  var http = new XMLHttpRequest();
+
+  http.open('GET', 'http://localhost:4001/' + url, true);
+  http.setRequestHeader('Content-type', 'application/json');
+
+  http.onreadystatechange = function() {
+    if(http.readyState == 4 && http.status == 200) {
+      cb(http.responseText);
+    }
+  }
+  http.send();
+}
+
+function getYesterday() {
+  get('yesterday', function(data) {
+    var res = JSON.parse(data);
+    res.data.forEach(function(row) {
+      let openClose = row.slice(1);
+      openClose.push(openClose[1] / openClose[0]);
+      HistoricalMap[row[0]] = openClose;
+    });
+    console.log(HistoricalMap);
+  });
+}
+
 
 $(function(){
+  getYesterday();
   loadTemplates();
   nextRound();
+  setTimeout(autoplay, 500);
 });
 
