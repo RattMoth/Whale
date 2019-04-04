@@ -1,206 +1,194 @@
-import os
-import sys
-import sqlite3
+#!/usr/bin/env python3
+from Robinhood import Robinhood
+import redis
+import urllib
 import time
-from threading import Lock
+import sys
+import json
+import pprint
+import sys
+import getpass
+import db
 
-user = {}
-_SCHEMA = {
-  'trades' : [	
-    ('id', 'integer primary key autoincrement'), 
-    ('user_id', 'text'),
-    ('rbn_id', 'text unique'),
-    ('created', 'datetime'),
-    ('side', 'text'),
-    ('price', 'float'),
-    ('quantity', 'float'),
-    ('instrument', 'text')
-  ],
-  # This is supposed to be enough for a candlestick
-  'historical': [
-    ('id', 'integer primary key autoincrement'), 
-    ('uuid', 'text'),
-    ('ticker', 'text'),
-    ('open', 'real'),
-    ('close', 'real'),
-    ('low', 'real'),
-    ('high', 'real'),
-    ('begin', 'datetime'),
-    #
-    # There's a small unit set here:
-    # minute, hour, day, week essentially. There's also I believe
-    # a 5 and 30 minute constant somewhere.  Regardless, it's
-    # not a large set.
-    #
-    ('duration', 'integer'),
-    ('unique', '(begin,ticker,duration)')
-  ]
-}
+my_trader = Robinhood()
+r = redis.Redis(host='localhost', port=6379, db=0,charset="utf-8", decode_responses=True)
 
-g_db_count = 0
-g_lock = Lock()
+def login(who=False, force=False):
+  if not who:
+    who = db.user['email']
 
-def _checkForTable(what):
-  global _SCHEMA
-  if what not in _SCHEMA:
-    raise Exception("Table {} not found".format(what))
+  token = r.hget('auth', who)
+  db.user['email'] = who
+  if not token or force:
+    password = getpass.getpass()
+    try:
+      my_trader.login(username=who, password=password)
 
-def run(query, args=None, with_last=False, db=None):
-  global g_lock
-  start = time.time()
-  """
-  if args is None:
-    print "%d: %s" % (g_db_count, query)
+    except Exception as ex:
+      raise ex
+      print("Password incorrect. Please try again")
+      login(who, force)
+
+    token = my_trader.headers['Authorization']
+    r.hset('auth', who, token)
+    print("Gathering history")
+    dividends()
+    my_history()
   else:
-    $print "%d: %s (%s)" % (g_db_count, query, ', '.join([str(m) for m in args]))
-  """
+    myid = r.hget('id', db.user['email'])
+    if myid:
+      db.user['id'] = myid
+    my_trader.headers['Authorization'] = token
 
-  g_lock.acquire()
-  if db is None:
-    db = connect()
+def showError(what):
+  print("Error: {}".format(what))
 
-  res = None
+def getInstrument(url):
+  key = url.split('/')[-2]
+  res = r.hget('inst', key)
+  if not res:
+    req  = urllib.request.Request(url) 
 
-  try:
-    if args is None:
-      res = db['c'].execute(query)
-    else:
-      res = db['c'].execute(query, args)
-
-    db['conn'].commit()
-    last = db['c'].lastrowid
-
-    if db['c'].rowcount == 0:
-      raise Exception("0 rows")
-
-  except Exception as exc:
-    raise exc
-
-  finally:
-    g_lock.release()
-
-  if with_last:
-    return (res, last)
+    with urllib.request.urlopen(req) as response:
+      res = response.read()
+      r.hset('inst', key, res)
 
   return res
 
+def historical(instrumentList = ['MSFT']):
+  for instrument in instrumentList:
+    data = my_trader.get_historical_quotes(instrument, 'day', 'week')
+    duration = 60 * 24
+    if data:
+      for row in data['historicals']:
+        db.insert('historical', {
+          'ticker': instrument,
+          'open': row['open_price'],
+          'close': row['close_price'],
+          'low': row['low_price'],
+          'high': row['high_price'],
+          'begin': row['begins_at'],
+          'duration': duration
+        })
+
+def inject(res):
+  res['instrument'] = json.loads(getInstrument(res['instrument']))
+  return res
+
+def getquote(what):
+  key = 's:{}'.format(what)
+  res = r.get(key)
+  if not res:
+    res = json.dumps(my_trader.get_quote(what))
+    r.set(key, res, 900)
+  return json.loads(res)
+
+def getuser(what):
+  if 'id' not in db.user:
+    myid = r.hget('id', db.user['email'])
+
+    if not myid and 'account' in what:
+      myid = what['account'].split('/')[-2]
+      r.hset('id', db.user['email'], myid)
+    db.user['id'] = myid
+
+  return db.user['id']
+
+def dividends(data = False):
+  print("Dividends")
+  if not data:
+    tradeList = my_trader.dividends()
+  else:
+    tradeList = data
+
+  for trade in tradeList['results']:
+    db.insert('trades', {
+      'user_id': getuser(trade),
+      'side': 'dividend',
+      'instrument': trade['instrument'].split('/')[-2],
+      'quantity': trade['position'],
+      'price': trade['rate'],
+      'created': trade['paid_at'],
+      'rbn_id': trade['id']
+    })
+
+  if tradeList['next']:
+    data = my_trader.session.get(tradeList['next'])
+    dividends(data.json())
+
+def portfolio():
+  pass
+
+def my_history(data = False):
+  if not data:
+    tradeList = my_trader.order_history()
+  else:
+    tradeList = data
+
+  if 'detail' in tradeList:
+    showError(tradeList['detail'])
+    login(force=True)
+
+  for trade in tradeList['results']:
+    for execution in trade['executions']:
+
+      try:
+        db.insert('trades', {
+          'user_id': getuser(trade),
+          'side': trade['side'],
+          'instrument': trade['instrument'].split('/')[-2],
+          'quantity': execution['quantity'],
+          'price': execution['price'],
+          'created': execution['timestamp'],
+          'rbn_id': execution['id']
+        })
+      except:
+        return
+
+    inject(trade)
+
+    print("{} {:5s} {:6s}".format(trade['created_at'], trade['side'], trade['instrument']['symbol']))
+
+  if tradeList['next']:
+    data = my_trader.session.get(tradeList['next'])
+    my_history(data.json())
+
+def analyze():
+  res = db.run('select side,count(*),sum(quantity*price) from trades where user_id = ? group by side',(db.user['id'], )).fetchall()
+
+  print(res)
+  pass
+
+def whoami():
+  pprint.pprint(db.user)
+
 def upgrade():
-  my_set = __builtins__['set']
-  db = connect()
+  db.upgrade()
 
-  for table, schema in list(_SCHEMA.items()):
-    existing_schema = db['c'].execute('pragma table_info(%s)' % table).fetchall()
-    existing_column_names = [str(row[1]) for row in existing_schema]
+def positions():
+  positionList = my_trader.positions()
+  tickerList = []
+  computed = 0
+  for position in positionList['results']:
+    position['instrument'] = json.loads(getInstrument(position['instrument']))
+    if float(position['quantity']) > 0:
+      symbol = position['instrument']['symbol']
+      res = getquote(symbol)
+      pprint.pprint(res)
+      last_price = res['last_extended_hours_trade_price']
+      if last_price is None:
+        last_price = res['last_trade_price']
 
-    our_column_names = [row[0] for row in schema]
+      computed += float(position['quantity']) * float(last_price)
+      popularity = my_trader.get_popularity(symbol)
+   
+      print("{:30s} {:5s} {:5.0f} {:10} {}".format(position['instrument']['name'][:29], symbol, float(position['quantity']), last_price, popularity))
 
-    # print table, existing_column_names, our_column_names
+  return {'computed': computed, 'positions': positionList }
 
-    to_add = my_set(our_column_names).difference(my_set(existing_column_names))
+def get_yesterday(fields = '*'):
+  res = db.run('select {} from historical group by ticker order by begin desc'.format(fields)).fetchall()
+  print(res)
 
-    to_add = filter(lambda x: x != 'unique', to_add)
 
-    # These are the things we should add ... this can be an empty set, that's fine.
-    for key in to_add:
-      # 
-      # sqlite doesn't support adding things into positional places (add column after X)
-      # they just get tacked on at the end ... which is fine - you'd have to rebuild 
-      # everything to achieve positional columns - that's not worth it - we just always 
-      # tack on at the end as a policy in our schema and we'll be fine.
-      #
-      # However, given all of that, we still need the schema
-      #
-      our_schema = schema[our_column_names.index(key)][1]
-      # print 'alter table %s add column %s %s' % (table, key, our_schema)
-      db['c'].execute('alter table %s add column %s %s' % (table, key, our_schema))
-      db['conn'].commit()
-
-    to_remove = my_set(existing_column_names).difference(my_set(our_column_names))
-
-    if len(to_remove) > 0:
-      our_schema = ','.join(["%s %s" % (key, klass) for key, klass in schema])
-      our_columns = ','.join(our_column_names)
-
-      drop_column_sql = """
-      CREATE TEMPORARY TABLE my_backup(%s);
-      INSERT INTO my_backup SELECT %s FROM %s;
-      DROP TABLE %s;
-      CREATE TABLE %s(%s);
-      INSERT INTO %s SELECT %s FROM my_backup;
-      DROP TABLE my_backup;
-      """ % (our_schema, our_columns, table, table,    table, our_schema, table, our_columns)
-
-      for sql_line in drop_column_sql.strip().split('\n'):
-        db['c'].execute(sql_line)
-
-      db['conn'].commit()
-
-def connect(db_file=None):
-  # A "singleton pattern" or some other fancy $10-world style of maintaining 
-  # the database connection throughout the execution of the script.
-  # Returns the database instance.
-  global g_db_count
-
-  if not db_file:
-    db_file = 'trades.db'
-
-  #
-  # We need to have one instance per thread, as this is what
-  # sqlite's driver dictates ... so we do this based on thread id.
-  #
-  # We don't have to worry about the different memory sharing models here.
-  # Really, just think about it ... it's totally irrelevant.
-  #
-
-  instance = {}
-
-  if not os.path.exists(db_file):
-    sys.stderr.write("Info: Creating db file %s\n" % db_file)
-
-  conn = sqlite3.connect(db_file)
-  instance.update({
-    'conn': conn,
-    'c': conn.cursor()
-  })
-
-  if db_file == 'trades.db' and g_db_count == 0: 
-
-    for table, schema in list(_SCHEMA.items()):
-      dfn = ','.join(["%s %s" % (key, klass) for key, klass in schema])
-      create = "CREATE TABLE IF NOT EXISTS {}({})".format(table, dfn)
-      instance['c'].execute(create)
-
-    instance['conn'].commit()
-
-  g_db_count += 1 
-
-  return instance
-
-def _insert(table, data):
-  _checkForTable(table)
-
-  known_keys = [x[0] for x in _SCHEMA[table]] 
-  insert_keys = list(data.keys() & known_keys)
-  shared_keys = insert_keys
-
-  # Make sure that the ordinal is maintained.
-  toInsert = [data[key] for key in insert_keys]
-
-  key_string = ','.join(insert_keys)
-
-  value_list = ['?'] * len(insert_keys)
-  value_string = ','.join(value_list)
-
-  return ['insert into {}({}) values({})'.format(table,key_string,value_string), shared_keys, toInsert]
-  
-def insert(table, data):
-  last = False
-  qstr, key_list, values = _insert(table, data)
-  try:
-    res, last = run(qstr, values, with_last = True)
-
-  except:
-    print(["Unable to insert a record", qstr, values])
-
-  return last
 
