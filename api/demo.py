@@ -27,7 +27,7 @@ lib.historical(["AAPL","MSFT","SNAP","FB","PEP","KO","TSLA","XOM","AMZN","WMT","
 while True:
   print("> ", end="")
   cmd = input()
-  eval(cmd)()
+  eval("lib." + cmd)()
 
 #dividends()
 #portfolio()
