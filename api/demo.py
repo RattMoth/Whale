@@ -13,28 +13,35 @@ import lib
 my_trader = Robinhood()
 r = redis.Redis(host='localhost', port=6379, db=0,charset="utf-8", decode_responses=True)
 
-def login(who):
+def login(who=False, force=False):
+  if not who:
+    who = lib.user['email']
+
   token = r.hget('auth', who)
   lib.user['email'] = who
-  if not token:
+  if not token or force:
     password = getpass.getpass()
     try:
       my_trader.login(username=who, password=password)
 
-    except:
+    except Exception as ex:
+      raise ex
       print("Password incorrect. Please try again")
-      login(who)
+      login(who, force)
 
     token = my_trader.headers['Authorization']
+    r.hset('auth', who, token)
     print("Gathering history")
     dividends()
     history()
-    r.hset('auth', who, token)
   else:
     myid = r.hget('id', lib.user['email'])
     if myid:
       lib.user['id'] = myid
     my_trader.headers['Authorization'] = token
+
+def showError(what):
+  print("Error: {}".format(what))
 
 def getInstrument(url):
   key = url.split('/')[-2]
@@ -47,6 +54,22 @@ def getInstrument(url):
       r.hset('inst', key, res)
 
   return res
+
+def getHistory(instrument = 'MSFT'):
+  data = my_trader.get_historical_quotes(instrument, 'day', 'week')
+  duration = 60 * 24
+  if data:
+    for row in data['historicals']:
+      lib.insert('historical', {
+        'ticker': instrument,
+        'open': row['open_price'],
+        'close': row['close_price'],
+        'low': row['low_price'],
+        'high': row['high_price'],
+        'begin': row['begins_at'],
+        'duration': duration
+      })
+      print(data)
 
 def inject(res):
   res['instrument'] = json.loads(getInstrument(res['instrument']))
@@ -101,6 +124,10 @@ def history(data = False):
     tradeList = my_trader.order_history()
   else:
     tradeList = data
+
+  if 'detail' in tradeList:
+    showError(tradeList['detail'])
+    login(force=True)
 
   for trade in tradeList['results']:
     for execution in trade['executions']:
@@ -159,7 +186,7 @@ def positions():
 
   return {'computed': computed, 'positions': positionList }
 
-#lib.upgrade()
+lib.upgrade()
 
 if len(sys.argv) < 2:
   print("Login username required")
@@ -167,6 +194,8 @@ if len(sys.argv) < 2:
 login(sys.argv[1])
 
 analyze()
+#getHistory()
+#sys.exit(0)
 
 while True:
   print("> ", end="")

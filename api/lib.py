@@ -16,6 +16,25 @@ _SCHEMA = {
     ('quantity', 'float'),
     ('instrument', 'text')
   ],
+  # This is supposed to be enough for a candlestick
+  'historical': [
+    ('id', 'integer primary key autoincrement'), 
+    ('uuid', 'text'),
+    ('ticker', 'text'),
+    ('open', 'real'),
+    ('close', 'real'),
+    ('low', 'real'),
+    ('high', 'real'),
+    ('begin', 'datetime'),
+    #
+    # There's a small unit set here:
+    # minute, hour, day, week essentially. There's also I believe
+    # a 5 and 30 minute constant somewhere.  Regardless, it's
+    # not a large set.
+    #
+    ('duration', 'integer'),
+    ('unique', '(begin,ticker,duration)')
+  ]
 }
 
 g_db_count = 0
@@ -78,6 +97,8 @@ def upgrade():
     # print table, existing_column_names, our_column_names
 
     to_add = my_set(our_column_names).difference(my_set(existing_column_names))
+
+    to_add = filter(lambda x: x != 'unique', to_add)
 
     # These are the things we should add ... this can be an empty set, that's fine.
     for key in to_add:
@@ -179,7 +200,7 @@ def insert(table, data):
     res, last = run(qstr, values, with_last = True)
 
   except:
-    print("Unable to insert a record ({}, {})".format(qstr, ','.join(values)))
+    print(["Unable to insert a record", qstr, values])
 
   return last
 
