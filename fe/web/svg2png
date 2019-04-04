@@ -1,0 +1,3 @@
+#!/bin/bash
+inkscape --export-png=$1.png --export-dpi=200 --export-background-opacity=0 --without-gui  $1.svg
+convert -resize $2x $1.png $1_$2.png
