@@ -187,8 +187,6 @@ def positions():
   return {'computed': computed, 'positions': positionList }
 
 def get_yesterday(fields = '*'):
-  res = db.run('select {} from historical group by ticker order by begin desc'.format(fields)).fetchall()
-  print(res)
-
+  return db.run('select {} from historical group by ticker order by begin desc'.format(fields)).fetchall()
 
 
