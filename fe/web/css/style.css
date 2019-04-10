@@ -71,12 +71,20 @@ h4 {
 .stack-container h2 {
   text-align: center;
   margin-top: 3rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.25rem;
 }
 .stack-container .header h3 {
   text-align: center;
   margin-bottom: 1rem;
+  font-size: 3rem;
   font-weight: 800;
+  color: #EEF;
+  text-shadow:
+       4px 4px 0 #000,
+     -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
 }
 .stack {
   margin: 0;
@@ -106,7 +114,8 @@ h4 {
 .perf-container .performance {
   position: absolute;
   bottom: 50%;
-  left: 10%;
+  width: 100%;
+  font-size: 2.5rem;
   text-align: center;
   font-weight: 800;
   color: #FFF;
@@ -143,4 +152,31 @@ h4 {
   left: 0;
   width: 100%;
   top: 0;
+}
+circle {
+  stroke: black;
+  stroke-width: 4;
+  stroke-dasharray: 250;
+  stroke-dashoffset: 1000;
+  animation: rotate 5s linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+#timer {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  position: relative;
+}
+#counter { 
+  position: absolute;
+  top: 15px;
+  font-size: 3rem;
+  font-weight: 800;
+  text-align: center;
+  width: 100%;
 }

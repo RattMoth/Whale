@@ -2,6 +2,7 @@ var
   Template = {},
   trash = [], 
   stash = [],
+  chooser,
   HistoricalMap = {},
   Game = {
     round: -1
@@ -101,29 +102,31 @@ function endGame() {
   $("#choice-container").html(
     Template.endgame()
   );
+  clearInterval(chooser);
+  $("#timer").hide();
   let max = Math.max.apply(0, Object.values(HistoricalMap).map(a => a[2]));
   let min = Math.min.apply(0, Object.values(HistoricalMap).map(a => a[2]));
 
   for(var ticker in HistoricalMap) {
     let change = HistoricalMap[ticker][2];
-    $(".performance." + ticker).html(relative_percent(HistoricalMap[ticker][2]));
-
     let perc = 100 * (max - change) / (max - min);
+    $(".performance." + ticker).html(Math.round(perc/10));
+    HistoricalMap[ticker][3] = Math.round(perc/10);
+
     console.log(change, perc, max, min);
     $(".perf-container." + ticker + ' .waves').css('height', perc + '%');
-    $(".perf-container." + ticker + ' .performance').css('bottom', .15 + .7 * perc + '%');
+    $(".perf-container." + ticker + ' .performance').css('bottom', .25 + .5 * perc + '%');
   }
 
-
   let stashTotal = stash.reduce(function(ix, row) {
-    return (1 - HistoricalMap[row[0]][2]) + ix;
+    return HistoricalMap[row[0]][3] + ix;
   }, 0);
   let trashTotal = trash.reduce(function(ix, row) {
-    return (1 - HistoricalMap[row[0]][2]) + ix;
+    return HistoricalMap[row[0]][3] + ix;
   }, 0);
-  doPercent('stash', stashTotal);
-  doPercent('trash', trashTotal);
-  doPercent('final', stashTotal - trashTotal);
+  $(".performance.stash").html(stashTotal);
+  $(".performance.trash").html(trashTotal);
+  $(".performance.final").html(stashTotal - trashTotal);
   Game.over = true;
   return false;
 }
@@ -143,6 +146,20 @@ function nextRound() {
   if(Game.round >= CompanyList.length) {
     return endGame();
   }
+
+  var timer_ix = 5;
+  if(chooser) {
+    clearInterval(chooser);
+  }
+  $('#counter').html(timer_ix);
+  chooser = setInterval(function(){
+    timer_ix --;
+    $('#counter').html(timer_ix);
+    if(timer_ix == -1) {
+      clearInterval(chooser);
+      choose(Game.round, Math.round(Math.random()));
+    }
+  }, 1000);
 
   $("#choice-container").html(
     Template.choice({ix: Game.round, choice: CompanyList[Game.round] })
@@ -196,6 +213,6 @@ $(function(){
   getYesterday();
   loadTemplates();
   nextRound();
-  //setTimeout(autoplay, 500);
+//  setTimeout(autoplay, 500);
 });
 
