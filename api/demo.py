@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from Robinhood import Robinhood
 import redis
-import urllib
 import time
 import sys
 import json
@@ -20,6 +19,7 @@ if len(sys.argv) < 2:
   sys.exit(0)
 lib.login(sys.argv[1])
 lib.historical(["AAPL","MSFT","SNAP","FB","PEP","KO","TSLA","XOM","AMZN","WMT","NFLX","DIS","GOOG","BIDU","V","PYPL","PM","PLNT"])
+
 
 #analyze()
 #sys.exit(0)

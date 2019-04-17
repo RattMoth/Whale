@@ -3,7 +3,6 @@
 from flask import Flask, request, Response, jsonify
 from flask_cors import CORS
 import json
-import urllib
 import logging
 import lib
 
