@@ -34,7 +34,7 @@ def login(who=False, force=False):
     dividends()
     my_history()
   else:
-    myid = r.hget('id', db.user['email'])
+    myid = lib.r.hget('id', db.user['email'])
     if myid:
       db.user['id'] = myid
     my_trader.headers['Authorization'] = token
@@ -47,7 +47,7 @@ def getInstrument(url):
 
     with urllib.request.urlopen(req) as response:
       res = response.read()
-      r.hset('inst', key, res)
+      lib.r.hset('inst', key, res)
 
   return res
 
@@ -73,19 +73,19 @@ def inject(res):
 
 def getquote(what):
   key = 's:{}'.format(what)
-  res = r.get(key)
+  res = lib.r.get(key)
   if not res:
     res = json.dumps(my_trader.get_quote(what))
-    r.set(key, res, 900)
+    lib.r.set(key, res, 900)
   return json.loads(res)
 
 def getuser(what):
   if 'id' not in db.user:
-    myid = r.hget('id', db.user['email'])
+    myid = lib.r.hget('id', db.user['email'])
 
     if not myid and 'account' in what:
       myid = what['account'].split('/')[-2]
-      r.hset('id', db.user['email'], myid)
+      lib.r.hset('id', db.user['email'], myid)
     db.user['id'] = myid
 
   return db.user['id']
