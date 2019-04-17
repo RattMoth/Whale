@@ -39,18 +39,18 @@ def historical(stockList):
       resjson = json.loads(resraw)
       time.sleep(13)
 
-    print(resjson)
-  """
-  duration = 60 * 24
-  if data:
-    for row in data['historicals']:
+    if 'Time Series (Daily)' not in resjson:
+      print(resraw)
+      return
+
+    duration = 60 * 24
+    for date,row in resjson['Time Series (Daily)'].items():
       db.insert('historical', {
-        'ticker': instrument,
-        'open': row['open_price'],
-        'close': row['close_price'],
-        'low': row['low_price'],
-        'high': row['high_price'],
-        'begin': row['begins_at'],
+        'ticker': stock,
+        'open': row['1. open'],
+        'high': row['2. high'],
+        'low': row['3. low'],
+        'close': row['4. close'],
+        'begin': date,
         'duration': duration
       })
-  """
