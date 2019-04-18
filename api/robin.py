@@ -47,6 +47,12 @@ def getInstrument(url):
 
     with urllib.request.urlopen(req) as response:
       res = response.read()
+      resJson = json.loads(res)
+      db.insert('instruments', [
+        'ticker': resJson['symbol'],
+        'name': resJson['simple_name']
+      ])
+
       lib.r.hset('inst', key, res)
 
   return res
