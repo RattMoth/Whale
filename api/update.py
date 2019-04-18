@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 import lib
+import alpha
 
 lib.upgrade()
-lib.historical(["AAPL","MSFT","SNAP","FB","PEP","KO","TSLA","XOM","AMZN","WMT","NFLX","DIS","GOOG","BIDU","V","PYPL","PM","PLNT"])
+alpha.historical(["AAPL","MSFT","SNAP","FB","PEP","KO","TSLA","XOM","AMZN","WMT","NFLX","DIS","GOOG","BIDU","V","PYPL","PM","PLNT"])
 
-lib.historical([
+alpha.historical([
   # Goldman sachs
   "GSLC","GSEW",
   # Schwab broad market & large cap
