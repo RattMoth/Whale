@@ -1,11 +1,28 @@
 Endpoints:
 
-  /users/:filter/:fields
-  /me
-  /follow/:user
-  /login
-  /register
-  /portfolio/:user
-  /bet
+## Chatting
+
+
+## Teams
+
+
+## Playing
+
+
+## Comparing
+
+
+## User
+
+### /me
+### /register
+### /login
+### /portfolio/:user
+
+## Sharing
+
+## /users/:filter/:fields
+## /follow/:user
+## /bet
 
 

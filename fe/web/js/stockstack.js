@@ -213,6 +213,6 @@ $(function(){
   getYesterday();
   loadTemplates();
   nextRound();
-//  setTimeout(autoplay, 500);
+  //setTimeout(autoplay, 500);
 });
 
