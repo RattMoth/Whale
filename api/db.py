@@ -7,6 +7,7 @@ from threading import Lock
 user = {}
 _SCHEMA = {
   'instruments' : [
+    ('id', 'integer primary key autoincrement'), 
     ('ticker', 'text unique'),
     ('name', 'text'),
     ('description', 'text')
