@@ -41,25 +41,43 @@ def login(who=False, force=False):
 
 def getInstrument(url):
   key = url.split('/')[-2]
-  res = lib.r.hget('inst', key).decode("utf-8") 
+  res = lib.r.hget('inst', key)
+
+  try:
+    res = res.decode("utf-8") 
+  except:
+    pass
+
   if not res:
     req  = urllib.request.Request(url) 
 
     with urllib.request.urlopen(req) as response:
       res = response.read()
-      resJson = json.loads(res)
-      db.insert('instruments', {
-        'ticker': resJson['symbol'],
-        'name': resJson['simple_name']
-      })
 
       lib.r.hset('inst', key, res)
+
+  resJson = json.loads(res)
+
+  name = resJson['simple_name']
+
+  if not name:
+    name = resJson['name']
+
+  db.insert('instruments', {
+    'ticker': resJson['symbol'],
+    'name': name
+  })
 
   return res
 
 def historical(instrumentList = ['MSFT']):
   for instrument in instrumentList:
-    data = my_trader.get_historical_quotes(instrument, 'day', 'week')
+    try:
+      data = my_trader.get_historical_quotes(instrument, 'day', 'week')
+    except:
+      login(force=True)
+      return historical(instrumentList)
+
     duration = 60 * 24
     if data:
       for row in data['historicals']:
@@ -173,7 +191,7 @@ def positions():
     if float(position['quantity']) > 0:
       symbol = position['instrument']['symbol']
       res = getquote(symbol)
-      pprint.pprint(res)
+      #pprint.pprint(res)
       last_price = res['last_extended_hours_trade_price']
       if last_price is None:
         last_price = res['last_trade_price']
