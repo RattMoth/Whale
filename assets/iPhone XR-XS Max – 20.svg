@@ -1,0 +1,218 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="414" height="896" viewBox="0 0 414 896">
+  <defs>
+    <filter id="Rectangle_49" x="86.112" y="245" width="242.272" height="242.273" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient" x1="0.5" y1="2.225" x2="0.5" y2="0.215" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ffe9e5"/>
+      <stop offset="1" stop-color="#fa8ab1"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.302" y1="0.179" x2="0.693" y2="1.028" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ffe9e5"/>
+      <stop offset="1" stop-color="#ffafcb"/>
+    </linearGradient>
+    <clipPath id="clip-iPhone_XR_XS_Max_20">
+      <rect width="414" height="896"/>
+    </clipPath>
+  </defs>
+  <g id="iPhone_XR_XS_Max_20" data-name="iPhone XR/XS Max – 20" clip-path="url(#clip-iPhone_XR_XS_Max_20)">
+    <rect width="414" height="896" fill="#fff"/>
+    <g id="Group_38" data-name="Group 38" transform="translate(0 -15)">
+      <g id="Group_17" data-name="Group 17" transform="translate(-621.217 -1443.645) rotate(30)">
+        <g id="Group_10" data-name="Group 10" transform="translate(1438 902)" opacity="0.8">
+          <path id="Path_1" data-name="Path 1" d="M176.544,132.752a1.5,1.5,0,0,1,1.467,1.735,12.076,12.076,0,0,1-11.949,10.338h0A12.076,12.076,0,0,1,154.1,134.387a1.471,1.471,0,0,1,1.478-1.635Z" transform="translate(-69.588 -62.389)" fill="#3fa9f5"/>
+          <g id="Group_4" data-name="Group 4" transform="translate(0 0)">
+            <g id="Group_2" data-name="Group 2">
+              <path id="Path_2" data-name="Path 2" d="M133.1,9.083H118.761a6.956,6.956,0,0,0-5.789,3.1,6.957,6.957,0,0,0-5.789-3.1H92.858A1.446,1.446,0,0,0,91.4,10.691a11.877,11.877,0,0,0,11.767,10.268h0a11.783,11.783,0,0,0,6.384-1.887,61.862,61.862,0,0,1-4.845,9.632c-5.164,7.229-14.155,6.2-14.155,6.2H13.437a7.862,7.862,0,0,0-7.863,7.862h0a52.27,52.27,0,0,0,52.27,52.27H67.931a47.441,47.441,0,0,0,20.46-4.584c17.931-8.514,29.744-27.877,29.744-49.352a159.618,159.618,0,0,0-1.168-21.678,11.782,11.782,0,0,0,5.825,1.541h0a11.879,11.879,0,0,0,11.754-10.169A1.474,1.474,0,0,0,133.1,9.083Z" transform="translate(-5.574 -9.083)" fill="#3fa9f5"/>
+              <g id="Group_1" data-name="Group 1" transform="translate(0.072 35.894)">
+                <path id="Path_3" data-name="Path 3" d="M57.53,85.954c-3.573-9.712-10.087-12.761-15.685-13.535a20.817,20.817,0,0,0-10.07.862c-3.355,1.2-8.606,4.3-14.715,4.3C7.408,77.582,5.7,72.419,5.7,72.419h0c1.412,29.488,24.784,49.568,52.27,49.8H68.058a47.44,47.44,0,0,0,20.46-4.584C76.563,119.78,65.683,108.12,57.53,85.954Z" transform="translate(-5.701 -72.17)" fill="#a6ddff"/>
+              </g>
+              <path id="Path_4" data-name="Path 4" d="M17.06,77.582c6.109,0,11.359-3.1,14.715-4.3a19.112,19.112,0,0,1,5.939-1.1v-.017L5.7,72.419S7.408,77.582,17.06,77.582Z" transform="translate(-5.629 -36.275)" fill="#fff"/>
+            </g>
+            <g id="Group_3" data-name="Group 3" transform="translate(62.477 51.005)">
+              <path id="Path_5" data-name="Path 5" d="M124.678,105.7a1.549,1.549,0,0,1-1.549-1.549,2.324,2.324,0,1,0-4.648,0,1.549,1.549,0,0,1-3.1,0,5.422,5.422,0,1,1,10.844,0A1.549,1.549,0,0,1,124.678,105.7Z" transform="translate(-115.383 -98.729)" fill="#2e3192"/>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g id="Group_6" data-name="Group 6" transform="translate(0 -50.773)" opacity="0.7">
+        <path id="Path_6" data-name="Path 6" d="M437.125,154.773c0,.093.012.185.012.279,0-.094.009-.186.012-.279Z" transform="translate(-145.595 0)" fill="#a6ddff"/>
+        <path id="Path_7" data-name="Path 7" d="M349.7,154.773c0,.093.012.185.012.279,0-.094.01-.186.012-.279Z" transform="translate(-117.024 0)" fill="#a6ddff"/>
+        <path id="Path_8" data-name="Path 8" d="M524.553,154.773c0,.093.012.185.012.279,0-.094.01-.186.013-.279Z" transform="translate(-174.167 0)" fill="#a6ddff"/>
+        <path id="Path_9" data-name="Path 9" d="M87.41,154.773c0,.093.013.185.013.279,0-.094.009-.186.012-.279Z" transform="translate(-31.309 0)" fill="#a6ddff"/>
+        <path id="Path_10" data-name="Path 10" d="M174.839,154.773c0,.093.012.185.012.279,0-.094.009-.186.012-.279Z" transform="translate(-59.881 0)" fill="#a6ddff"/>
+        <path id="Path_11" data-name="Path 11" d="M0,154.773v.279c0-.094.009-.186.012-.279Z" transform="translate(-2.744 0)" fill="#a6ddff"/>
+        <path id="Path_12" data-name="Path 12" d="M611.982,154.773c0,.093.012.185.012.279,0-.094.009-.186.012-.279Z" transform="translate(-202.739 0)" fill="#a6ddff"/>
+        <path id="Path_13" data-name="Path 13" d="M262.268,154.773c0,.093.012.185.012.279,0-.094.009-.186.012-.279Z" transform="translate(-88.452 0)" fill="#a6ddff"/>
+        <path id="Path_14" data-name="Path 14" d="M1136.553,154.773c0,.093.012.185.012.279,0-.094.01-.186.013-.279Z" transform="translate(-374.168 0)" fill="#a6ddff"/>
+        <path id="Path_15" data-name="Path 15" d="M699.41,154.773c0,.093.013.185.013.279,0-.094.009-.186.012-.279Z" transform="translate(-231.31 0)" fill="#a6ddff"/>
+        <path id="Path_16" data-name="Path 16" d="M1049.125,154.773c0,.093.012.185.012.279,0-.094.009-.186.012-.279Z" transform="translate(-345.596 0)" fill="#a6ddff"/>
+        <path id="Path_17" data-name="Path 17" d="M1223.982,154.773c0,.093.012.185.012.279v-.279Z" transform="translate(-402.74 0)" fill="#a6ddff"/>
+        <path id="Path_18" data-name="Path 18" d="M791.826,172.192c-12.732,0-23.575-4.671-27.676-11.21a2.06,2.06,0,0,0-3.505,0c-4.1,6.539-14.944,11.21-27.676,11.21s-23.574-4.671-27.675-11.21a2.061,2.061,0,0,0-3.506,0c-4.1,6.539-14.944,11.21-27.675,11.21s-23.575-4.671-27.676-11.21a2.061,2.061,0,0,0-3.506,0c-4.1,6.539-14.944,11.21-27.675,11.21s-23.574-4.671-27.675-11.21a2.061,2.061,0,0,0-3.506,0c-4.1,6.539-14.944,11.21-27.676,11.21s-23.574-4.671-27.675-11.21a2.061,2.061,0,0,0-3.506,0c-4.1,6.539-14.944,11.21-27.675,11.21s-23.575-4.671-27.676-11.21a2.06,2.06,0,0,0-3.505,0c-4.1,6.539-14.944,11.21-27.676,11.21s-23.574-4.671-27.675-11.21a2.061,2.061,0,0,0-3.506,0c-4.1,6.539-14.944,11.21-27.675,11.21s-23.575-4.671-27.676-11.21a2.06,2.06,0,0,0-3.505,0c-4.1,6.539-14.944,11.21-27.676,11.21s-23.574-4.671-27.675-11.21a2.061,2.061,0,0,0-3.506,0c-4.1,6.539-14.944,11.21-27.675,11.21s-23.575-4.671-27.676-11.21a2.061,2.061,0,0,0-3.506,0c-4.1,6.539-14.944,11.21-27.675,11.21s-23.574-4.671-27.675-11.21a2.061,2.061,0,0,0-3.506,0c-4.1,6.539-14.944,11.21-27.676,11.21s-23.574-4.671-27.675-11.21a2.061,2.061,0,0,0-3.506,0c-4.1,6.539-14.944,11.21-27.675,11.21s-23.575-4.671-27.676-11.21a2.06,2.06,0,0,0-3.505,0c-4.1,6.539-14.944,11.21-27.676,11.21-16.252,0-29.428-7.613-29.428-17.005l-2.063,827.5a2.063,2.063,0,0,0,2.063,2.063H817.129c1.139,0,12.583-.924,12.583-2.063l-8.457-827.5C821.255,164.579,808.08,172.192,791.826,172.192Z" transform="translate(0 -0.135)" fill="#a6ddff"/>
+        <path id="Path_19" data-name="Path 19" d="M961.7,154.773c0,.093.012.185.012.279,0-.094.01-.186.012-.279Z" transform="translate(-317.025 0)" fill="#a6ddff"/>
+        <path id="Path_20" data-name="Path 20" d="M786.839,154.773c0,.093.012.185.012.279,0-.094.009-.186.012-.279Z" transform="translate(-259.882 0)" fill="#a6ddff"/>
+        <path id="Path_21" data-name="Path 21" d="M874.268,154.773c0,.093.012.185.012.279,0-.094.009-.186.012-.279Z" transform="translate(-288.453 0)" fill="#a6ddff"/>
+      </g>
+      <g id="Group_36" data-name="Group 36" transform="translate(134 555)">
+        <g id="Group_16" data-name="Group 16" transform="translate(329 -5)">
+          <circle id="Ellipse_19" data-name="Ellipse 19" cx="82.5" cy="82.5" r="82.5" transform="translate(314 339)" fill="#3fa9f5" opacity="0.5"/>
+          <text id="APPL" transform="translate(357 430.986)" fill="#fff" font-size="32" font-family="Agrandir-Regular, Agrandir"><tspan x="0" y="0">APPL</tspan></text>
+          <text id="_3_" data-name="+3%" transform="translate(366 468)" fill="#1e83cb" font-size="30" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">+3%</tspan></text>
+        </g>
+        <g id="Group_13" data-name="Group 13" transform="translate(369 128)">
+          <circle id="Ellipse_20" data-name="Ellipse 20" cx="82.5" cy="82.5" r="82.5" transform="translate(274 564)" fill="#3fa9f5" opacity="0.5"/>
+          <text id="DIS" transform="translate(356 654.986)" fill="#fff" font-size="32" font-family="Agrandir-Regular, Agrandir"><tspan x="-24.496" y="0">DIS</tspan></text>
+          <text id="_1.6_" data-name="+1.6%" transform="translate(316 692)" fill="#1e83cb" font-size="30" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">+1.6%</tspan></text>
+        </g>
+        <g id="Group_12" data-name="Group 12" transform="translate(466 410)">
+          <circle id="Ellipse_21" data-name="Ellipse 21" cx="82.5" cy="82.5" r="82.5" transform="translate(177 640)" fill="#3fa9f5" opacity="0.5"/>
+          <text id="WMT" transform="translate(260 736.986)" fill="#fff" font-size="32" font-family="Agrandir-Regular, Agrandir"><tspan x="-39.248" y="0">WMT</tspan></text>
+          <text id="_1.1_" data-name="+1.1%" transform="translate(223 774)" fill="#1e83cb" font-size="30" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">+1.1%</tspan></text>
+        </g>
+        <g id="Group_11" data-name="Group 11" transform="translate(565 12)">
+          <circle id="Ellipse_24" data-name="Ellipse 24" cx="82.5" cy="82.5" r="82.5" transform="translate(78 859)" fill="#3fa9f5" opacity="0.5"/>
+          <text id="KO" transform="translate(163 955.986)" fill="#fff" font-size="32" font-family="Agrandir-Regular, Agrandir"><tspan x="-21.312" y="0">KO</tspan></text>
+          <text id="_-3_" data-name="-3%" transform="translate(132 993)" fill="#1e83cb" font-size="30" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">-3%</tspan></text>
+        </g>
+        <g id="Group_15" data-name="Group 15" transform="translate(525 92)">
+          <circle id="Ellipse_22" data-name="Ellipse 22" cx="82.5" cy="82.5" r="82.5" transform="translate(118 421)" fill="#3fa9f5" opacity="0.5"/>
+          <text id="NFLX" transform="translate(161 512.986)" fill="#fff" font-size="32" font-family="Agrandir-Regular, Agrandir"><tspan x="0" y="0">NFLX</tspan></text>
+          <text id="_-2_" data-name="-2%" transform="translate(172 551)" fill="#1e83cb" font-size="30" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">-2%</tspan></text>
+        </g>
+        <g id="Group_14" data-name="Group 14" transform="translate(266 500)">
+          <circle id="Ellipse_23" data-name="Ellipse 23" cx="82.5" cy="82.5" r="82.5" transform="translate(377 729)" fill="#3fa9f5" opacity="0.5"/>
+          <text id="PYPL" transform="translate(460 819.986)" fill="#fff" font-size="32" font-family="Agrandir-Regular, Agrandir"><tspan x="-37.568" y="0">PYPL</tspan></text>
+          <text id="_-1_" data-name="-1%" transform="translate(434 857)" fill="#1e83cb" font-size="30" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">-1%</tspan></text>
+        </g>
+      </g>
+      <g id="Group_37" data-name="Group 37" transform="translate(0 555)">
+        <g id="Group_22" data-name="Group 22" transform="translate(665 532)">
+          <circle id="Ellipse_19-2" data-name="Ellipse 19" cx="82.5" cy="82.5" r="82.5" transform="translate(314 339)" fill="#fff" opacity="0.5"/>
+          <text id="APPL-2" data-name="APPL" transform="translate(357 430.986)" fill="#3fa9f5" font-size="32" font-family="Agrandir-Regular, Agrandir"><tspan x="0" y="0">APPL</tspan></text>
+          <text id="_3_2" data-name="+3%" transform="translate(366 468)" fill="#2e3192" font-size="30" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">+3%</tspan></text>
+        </g>
+        <g id="Group_21" data-name="Group 21" transform="translate(705 128)">
+          <circle id="Ellipse_20-2" data-name="Ellipse 20" cx="82.5" cy="82.5" r="82.5" transform="translate(274 564)" fill="#fff" opacity="0.5"/>
+          <text id="DIS-2" data-name="DIS" transform="translate(356 654.986)" fill="#3fa9f5" font-size="32" font-family="Agrandir-Regular, Agrandir"><tspan x="-24.496" y="0">DIS</tspan></text>
+          <text id="_1.6_2" data-name="+1.6%" transform="translate(316 692)" fill="#2e3192" font-size="30" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">+1.6%</tspan></text>
+        </g>
+        <g id="Group_26" data-name="Group 26" transform="translate(602 321)">
+          <circle id="Ellipse_23-2" data-name="Ellipse 23" cx="82.5" cy="82.5" r="82.5" transform="translate(377 729)" fill="#fff" opacity="0.5"/>
+          <text id="PYPL-2" data-name="PYPL" transform="translate(460 819.986)" fill="#3fa9f5" font-size="32" font-family="Agrandir-Regular, Agrandir"><tspan x="-37.568" y="0">PYPL</tspan></text>
+          <text id="_-1_2" data-name="-1%" transform="translate(434 857)" fill="#2e3192" font-size="30" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">-1%</tspan></text>
+        </g>
+        <g id="Group_24" data-name="Group 24" transform="translate(901 -525)">
+          <circle id="Ellipse_24-2" data-name="Ellipse 24" cx="82.5" cy="82.5" r="82.5" transform="translate(78 859)" fill="#fff" opacity="0.5"/>
+          <text id="KO-2" data-name="KO" transform="translate(163 955.986)" fill="#3fa9f5" font-size="32" font-family="Agrandir-Regular, Agrandir"><tspan x="-21.312" y="0">KO</tspan></text>
+          <text id="_-3_2" data-name="-3%" transform="translate(132 993)" fill="#2e3192" font-size="30" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">-3%</tspan></text>
+        </g>
+        <g id="Group_23" data-name="Group 23" transform="translate(861 92)">
+          <circle id="Ellipse_22-2" data-name="Ellipse 22" cx="82.5" cy="82.5" r="82.5" transform="translate(118 421)" fill="#fff" opacity="0.5"/>
+          <text id="NFLX-2" data-name="NFLX" transform="translate(161 512.986)" fill="#3fa9f5" font-size="32" font-family="Agrandir-Regular, Agrandir"><tspan x="0" y="0">NFLX</tspan></text>
+          <text id="_-2_2" data-name="-2%" transform="translate(172 551)" fill="#2e3192" font-size="30" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">-2%</tspan></text>
+        </g>
+        <g id="Group_25" data-name="Group 25" transform="translate(802 589)">
+          <circle id="Ellipse_21-2" data-name="Ellipse 21" cx="82.5" cy="82.5" r="82.5" transform="translate(177 640)" fill="#fff" opacity="0.5"/>
+          <text id="WMT-2" data-name="WMT" transform="translate(260 736.986)" fill="#3fa9f5" font-size="32" font-family="Agrandir-Regular, Agrandir"><tspan x="-39.248" y="0">WMT</tspan></text>
+          <text id="_1.1_2" data-name="+1.1%" transform="translate(223 774)" fill="#2e3192" font-size="30" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">+1.1%</tspan></text>
+        </g>
+      </g>
+      <g id="Group_18" data-name="Group 18" transform="translate(0 -32)">
+        <rect id="Rectangle_5" data-name="Rectangle 5" width="527" height="527" rx="263.5" transform="translate(697 309)" fill="#fff" opacity="0.996"/>
+        <text id="Apple_Inc." data-name="Apple Inc." transform="translate(888 481.986)" fill="#6a6a6a" font-size="32" font-family="Agrandir-Regular, Agrandir"><tspan x="-71.568" y="0">Apple Inc.</tspan></text>
+        <text id="Results" transform="translate(960 428.986)" fill="#3fa9f5" font-size="32" font-family="Agrandir-Regular, Agrandir"><tspan x="-54.592" y="0">Results</tspan></text>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Rectangle_49)">
+      <rect id="Rectangle_49-2" data-name="Rectangle 49" width="224.272" height="224.273" rx="112.136" transform="translate(95.11 251)" fill="#fff"/>
+    </g>
+    <g id="Group_112" data-name="Group 112" transform="translate(0 -111)">
+      <text id="You_earned" data-name="You earned" transform="translate(206.528 333.923)" fill="#2e3192" font-size="24" font-family="Agrandir-Regular, Agrandir"><tspan x="-64.164" y="0">You earned</tspan></text>
+    </g>
+    <text id="_8xp" data-name="8xp" transform="translate(168 414)" fill="#3fa9f5" font-size="47" font-family="Agrandir-Regular, Agrandir"><tspan x="0" y="0">8xp</tspan></text>
+    <g id="Group_118" data-name="Group 118" transform="translate(35 -31)">
+      <text id="_23" data-name="23" transform="translate(172 378)" fill="#ffb5ce" font-size="47" font-family="Agrandir-Regular, Agrandir"><tspan x="0" y="0">23</tspan></text>
+      <g id="Group_113" data-name="Group 113" transform="translate(-8 -95.395)">
+        <path id="Path_106" data-name="Path 106" d="M5050.572,1991.882a66.043,66.043,0,0,1-14.828-1.477,2.492,2.492,0,0,1-1.815-2.492v-.5c0-4.425,2.284-6.395,5.928-8.114a2.811,2.811,0,0,0,1.489-1.484c.223-.554,2.171,0,2.171,0h13.161s1.646-.449,1.9,0a3.41,3.41,0,0,0,1.818,1.422c4.045,1.572,6.82,3.6,6.82,8.394v.282a2.491,2.491,0,0,1-1.815,2.492A66.873,66.873,0,0,1,5050.572,1991.882Z" transform="translate(-4911.754 -1506.967)" fill="url(#linear-gradient)"/>
+        <path id="Path_104" data-name="Path 104" d="M704.617,1236.419c.135-1.351,2.036-1.274,1.949-3.646s-1.213-2.019-1.631-3.364c-.408-1.314,1.213-2.176.4-4.58s-2.548-1.717-3.267-2.92c-.707-1.182,1.133-2.329-.192-4.431s-3-1.416-4.038-2.374c-1-.926-.006-2.948-2.066-4.6-2.095-1.579-3.394-.551-4.683-1.172-1.212-.584-.8-2.319-3.281-3.26-2.191-.881-3.083.4-4.5.12-1.312-.257-1.34-2.1-3.867-2.332s-2.85,1.259-4.279,1.28c-1.429-.021-2.036-1.426-4.346-1.114s-2.487,1.91-3.8,2.166c-1.417.277-2.173-.826-4.384,0s-2.186,2.557-3.4,3.14c-1.289.621-2.648,0-4.666,1.551s-1.083,3.3-2.083,4.224c-1.036.958-2.3.45-3.548,2.449s.025,3.174-.682,4.356c-.719,1.2-2.455.679-3.258,3.039s.8,3.146.392,4.46c-.418,1.345-1.7,1.3-1.6,3.4s1.787,2.262,1.922,3.613c.214,2.14-1.217,2.045-1.2,4.108.042,2.822,4.912,3.911,13.446,10.36,7.328,5.537,8.449,12.346,17.208,12.649,8.759-.3,9.88-7.112,17.208-12.649,8.535-6.448,12.638-7.94,12.966-10.36S704.4,1238.559,704.617,1236.419Z" transform="translate(-536.32 -776.56)" fill="url(#linear-gradient-2)"/>
+      </g>
+    </g>
+    <g id="Group_9" data-name="Group 9" transform="translate(-52 -16)">
+      <text id="whale" transform="translate(78 65)" fill="#3fa9f5" font-size="30" font-family="Agrandir-Regular, Agrandir"><tspan x="0" y="0">whale</tspan></text>
+    </g>
+    <g id="Group_119" data-name="Group 119" transform="translate(37 495.466)">
+      <g id="Group_36-2" data-name="Group 36" transform="translate(24 1)">
+        <g id="Group_16-2" data-name="Group 16" transform="translate(0)">
+          <circle id="Ellipse_19-3" data-name="Ellipse 19" cx="65.808" cy="65.808" r="65.808" fill="#3fa9f5" opacity="0.5"/>
+          <text id="APPL-3" data-name="APPL" transform="translate(34.3 73.23)" fill="#fff" font-size="25" font-family="Agrandir-Regular, Agrandir"><tspan x="0" y="0">APPL</tspan></text>
+          <text id="_3_3" data-name="+3%" transform="translate(41.479 101.767)" fill="#1e83cb" font-size="23" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">+3%</tspan></text>
+        </g>
+        <g id="Group_13-2" data-name="Group 13" transform="translate(0 285.567)">
+          <circle id="Ellipse_20-3" data-name="Ellipse 20" cx="65.808" cy="65.808" r="65.808" transform="translate(0 0)" fill="#3fa9f5" opacity="0.5"/>
+          <text id="DIS-3" data-name="DIS" transform="translate(65.265 72.433)" fill="#fff" font-size="25" font-family="Agrandir-Regular, Agrandir"><tspan x="-19.138" y="0">DIS</tspan></text>
+          <text id="_1.6_3" data-name="+1.6%" transform="translate(33.502 100.97)" fill="#1e83cb" font-size="23" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">+1.6%</tspan></text>
+        </g>
+        <g id="Group_12-2" data-name="Group 12" transform="translate(0 571.134)">
+          <circle id="Ellipse_21-3" data-name="Ellipse 21" cx="65.808" cy="65.808" r="65.808" fill="#3fa9f5" opacity="0.5"/>
+          <text id="WMT-3" data-name="WMT" transform="translate(64.098 76.219)" fill="#fff" font-size="24" font-family="Agrandir-Regular, Agrandir"><tspan x="-29.436" y="0">WMT</tspan></text>
+          <text id="_1.1_3" data-name="+1.1%" transform="translate(36.693 105.756)" fill="#1e83cb" font-size="23" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">+1.1%</tspan></text>
+        </g>
+        <g id="Group_11-2" data-name="Group 11" transform="translate(0 428.351)">
+          <circle id="Ellipse_24-3" data-name="Ellipse 24" cx="65.808" cy="65.808" r="65.808" fill="#3fa9f5" opacity="0.5"/>
+          <text id="KO-3" data-name="KO" transform="translate(67.051 76.219)" fill="#fff" font-size="24" font-family="Agrandir-Regular, Agrandir"><tspan x="-15.984" y="0">KO</tspan></text>
+          <text id="_-3_3" data-name="-3%" transform="translate(43.074 105.756)" fill="#1e83cb" font-size="23" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">-3%</tspan></text>
+        </g>
+        <g id="Group_15-2" data-name="Group 15" transform="translate(0 142.784)">
+          <circle id="Ellipse_22-3" data-name="Ellipse 22" cx="65.808" cy="65.808" r="65.808" fill="#3fa9f5" opacity="0.5"/>
+          <text id="NFLX-3" data-name="NFLX" transform="translate(34.3 72.23)" fill="#fff" font-size="24" font-family="Agrandir-Regular, Agrandir"><tspan x="0" y="0">NFLX</tspan></text>
+          <text id="_-2_3" data-name="-2%" transform="translate(43.074 102.565)" fill="#1e83cb" font-size="23" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">-2%</tspan></text>
+        </g>
+        <g id="Group_14-2" data-name="Group 14" transform="translate(0 713.918)">
+          <circle id="Ellipse_23-3" data-name="Ellipse 23" cx="65.808" cy="65.808" r="65.808" fill="#3fa9f5" opacity="0.5"/>
+          <text id="PYPL-3" data-name="PYPL" transform="translate(64.895 72.433)" fill="#fff" font-size="25" font-family="Agrandir-Regular, Agrandir"><tspan x="-29.35" y="0">PYPL</tspan></text>
+          <text id="_-1_3" data-name="-1%" transform="translate(45.467 100.97)" fill="#1e83cb" font-size="23" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">-1%</tspan></text>
+        </g>
+      </g>
+      <g id="Group_37-2" data-name="Group 37" transform="translate(185.13 1)">
+        <g id="Group_22-2" data-name="Group 22" transform="translate(0 428.351)">
+          <circle id="Ellipse_19-4" data-name="Ellipse 19" cx="65.808" cy="65.808" r="65.808" transform="translate(0 0)" fill="#fff" opacity="0.5"/>
+          <text id="APPL-4" data-name="APPL" transform="translate(34.3 73.23)" fill="#3fa9f5" font-size="25" font-family="Agrandir-Regular, Agrandir"><tspan x="0" y="0">APPL</tspan></text>
+          <text id="_3_4" data-name="+3%" transform="translate(41.479 101.767)" fill="#2e3192" font-size="23" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">+3%</tspan></text>
+        </g>
+        <g id="Group_21-2" data-name="Group 21" transform="translate(0 285.567)">
+          <circle id="Ellipse_20-4" data-name="Ellipse 20" cx="65.808" cy="65.808" r="65.808" transform="translate(0 0)" fill="#fff" opacity="0.5"/>
+          <text id="DIS-4" data-name="DIS" transform="translate(65.265 72.433)" fill="#3fa9f5" font-size="25" font-family="Agrandir-Regular, Agrandir"><tspan x="-19.138" y="0">DIS</tspan></text>
+          <text id="_1.6_4" data-name="+1.6%" transform="translate(33.502 100.97)" fill="#2e3192" font-size="23" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">+1.6%</tspan></text>
+        </g>
+        <g id="Group_26-2" data-name="Group 26" transform="translate(0 571.134)">
+          <circle id="Ellipse_23-4" data-name="Ellipse 23" cx="65.808" cy="65.808" r="65.808" transform="translate(0 0)" fill="#fff" opacity="0.5"/>
+          <text id="PYPL-4" data-name="PYPL" transform="translate(64.895 72.433)" fill="#3fa9f5" font-size="25" font-family="Agrandir-Regular, Agrandir"><tspan x="-29.35" y="0">PYPL</tspan></text>
+          <text id="_-1_4" data-name="-1%" transform="translate(45.467 100.97)" fill="#2e3192" font-size="23" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">-1%</tspan></text>
+        </g>
+        <g id="Group_24-2" data-name="Group 24" transform="translate(0 0)">
+          <circle id="Ellipse_24-4" data-name="Ellipse 24" cx="65.808" cy="65.808" r="65.808" fill="#fff" opacity="0.5"/>
+          <text id="KO-4" data-name="KO" transform="translate(67.051 76.219)" fill="#3fa9f5" font-size="24" font-family="Agrandir-Regular, Agrandir"><tspan x="-15.984" y="0">KO</tspan></text>
+          <text id="_-3_4" data-name="-3%" transform="translate(43.074 105.756)" fill="#2e3192" font-size="23" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">-3%</tspan></text>
+        </g>
+        <g id="Group_23-2" data-name="Group 23" transform="translate(0 142.784)">
+          <circle id="Ellipse_22-4" data-name="Ellipse 22" cx="65.808" cy="65.808" r="65.808" transform="translate(0)" fill="#fff" opacity="0.5"/>
+          <text id="NFLX-4" data-name="NFLX" transform="translate(34.3 72.23)" fill="#3fa9f5" font-size="24" font-family="Agrandir-Regular, Agrandir"><tspan x="0" y="0">NFLX</tspan></text>
+          <text id="_-2_4" data-name="-2%" transform="translate(43.074 102.565)" fill="#2e3192" font-size="23" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">-2%</tspan></text>
+        </g>
+        <g id="Group_25-2" data-name="Group 25" transform="translate(0 713.918)">
+          <circle id="Ellipse_21-4" data-name="Ellipse 21" cx="65.808" cy="65.808" r="65.808" transform="translate(0)" fill="#fff" opacity="0.5"/>
+          <text id="WMT-4" data-name="WMT" transform="translate(64.098 76.219)" fill="#3fa9f5" font-size="24" font-family="Agrandir-Regular, Agrandir"><tspan x="-29.436" y="0">WMT</tspan></text>
+          <text id="_1.1_4" data-name="+1.1%" transform="translate(36.693 105.756)" fill="#2e3192" font-size="23" font-family="Apercu-Medium, Apercu" font-weight="500"><tspan x="0" y="0">+1.1%</tspan></text>
+        </g>
+      </g>
+    </g>
+    <g id="Group_43" data-name="Group 43" transform="translate(-1040.25 -59)">
+      <text id="TEAM" transform="translate(1405.22 99.986)" font-size="13" font-family="Agrandir-Regular, Agrandir" letter-spacing="0.075em" opacity="0.3"><tspan x="-18.973" y="0">TEAM</tspan></text>
+      <text id="Los_Angeles" data-name="Los Angeles" transform="translate(1372 120.176)" fill="#3fa9f5" font-size="19" font-family="Agrandir-Regular, Agrandir"><tspan x="-52.753" y="0">Los Angeles</tspan></text>
+    </g>
+  </g>
+</svg>
