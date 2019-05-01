@@ -12,11 +12,11 @@ key="DF0GV3M5L6N2IE5"
 def historical(stockList):
   for stock in stockList:
     url="https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={}&apikey={}".format(stock, key)
-    resraw  = cache_get(url)
+    resraw  = lib.cache_get(url)
 
     resjson = json.loads(resraw)
     if "Note" in resjson:
-      resraw  = cache_get(url, True)
+      resraw  = lib.cache_get(url, True)
       resjson = json.loads(resraw)
       time.sleep(13)
 

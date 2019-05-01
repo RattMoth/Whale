@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import lib
-import alpha
+import sites.alpha as alpha
 
 lib.upgrade()
 alpha.historical(["AAPL","MSFT","SNAP","FB","PEP","KO","TSLA","XOM","AMZN","WMT","NFLX","DIS","GOOG","BIDU","V","PYPL","PM","PLNT"])
