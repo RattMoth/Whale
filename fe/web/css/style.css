@@ -1,5 +1,4 @@
 body {
-  background: url('../sand.jpg') repeat;
   text-align: center;
   color: #434343;
   font-family: 'Noto Sans', sans-serif;;
@@ -33,9 +32,8 @@ h4 {
   padding: 2rem;
   cursor: pointer;
   display: inline-block;
-  border-radius: 4px;
+  border-radius: 1000px;
   transition: background-color 0.5s ease;
-  box-shadow: 2px 2px 4px 4px rgba(80,80,80,0.3);
   background: rgba(166, 221, 255, 0.5);
   border: 2px solid transparent;
 }
@@ -95,7 +93,13 @@ h4 {
   background: rgba(166, 221, 255, 0.3);
   border: 1px solid #3FA9F5;
   padding: 0.75rem;
+  height: 10rem;
+  width: 10rem;
+  border-radius: 1000px;
   animation: fadein 1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 @keyframes fadein {
     from { opacity: 0; }

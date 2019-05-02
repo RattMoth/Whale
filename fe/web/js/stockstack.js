@@ -9,7 +9,7 @@ var
   },
   ev = EvDa(),
   CompanyList = [
-    [['AAPL', 'Apple Computers'], ['MSFT', 'Microsoft']],
+    [['AAPL', 'Apple'], ['MSFT', 'Microsoft']],
     [['SNAP', 'Snapchat'], ['FB', 'Facebook']],
     [['PEP', 'Pepsi'], ['KO', 'Coke']],
     [['TSLA', 'Tesla'], ['XOM', 'Exxon Mobil']],
