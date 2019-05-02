@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="63mm"
+   height="43mm"
+   viewBox="0 0 63 43"
+   version="1.1"
+   id="svg218"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="whale.svg">
+  <defs
+     id="defs212" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="154.26652"
+     inkscape:cy="123.12095"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="2552"
+     inkscape:window-height="1410"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata215">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-254)">
+    <g
+       style="opacity:0.8"
+       transform="matrix(0.26458333,0,0,0.26458333,0.12622637,253.26002)"
+       data-name="Group 10"
+       id="Group_10">
+      <path
+         style="fill:#3fa9f5"
+         inkscape:connector-curvature="0"
+         d="m 193.558,132.752 a 2.633,2.633 0 0 1 2.578,3.049 21.225,21.225 0 0 1 -21,18.17 v 0 a 21.224,21.224 0 0 1 -21.026,-18.346 2.585,2.585 0 0 1 2.6,-2.873 z"
+         data-name="Path 1"
+         id="Path_1" />
+      <g
+         data-name="Group 4"
+         id="Group_4">
+        <g
+           data-name="Group 2"
+           id="Group_2">
+          <path
+             style="fill:#3fa9f5"
+             inkscape:connector-curvature="0"
+             d="m 229.718,9.083 h -25.209 a 12.225,12.225 0 0 0 -10.174,5.445 12.228,12.228 0 0 0 -10.174,-5.445 h -25.179 a 2.542,2.542 0 0 0 -2.554,2.826 20.875,20.875 0 0 0 20.682,18.046 v 0 a 20.71,20.71 0 0 0 11.221,-3.316 c -2.606,6.1 -5.938,13.32 -8.516,16.929 -9.076,12.7 -24.878,10.89 -24.878,10.89 H 19.393 A 13.818,13.818 0 0 0 5.574,68.276 v 0 a 91.869,91.869 0 0 0 91.869,91.868 h 17.728 a 83.381,83.381 0 0 0 35.961,-8.056 c 31.516,-14.964 52.278,-49 52.278,-86.74 0,-15.308 -0.594,-27.624 -2.053,-38.1 a 20.707,20.707 0 0 0 10.243,2.707 v 0 a 20.878,20.878 0 0 0 20.659,-17.873 2.59,2.59 0 0 0 -2.541,-2.999 z"
+             data-name="Path 2"
+             id="Path_2" />
+          <g
+             data-name="Group 1"
+             id="Group_1">
+            <path
+               style="fill:#a6ddff"
+               inkscape:connector-curvature="0"
+               d="M 96.794,96.4 C 90.515,79.327 79.066,73.967 69.226,72.608 a 36.587,36.587 0 0 0 -17.7,1.515 c -5.9,2.115 -15.125,7.56 -25.862,7.56 C 8.7,81.683 5.7,72.608 5.7,72.608 v 0 c 2.481,51.828 43.56,87.12 91.868,87.536 H 115.3 a 83.38,83.38 0 0 0 35.96,-8.056 C 130.246,155.849 111.125,135.356 96.794,96.4 Z"
+               data-name="Path 3"
+               id="Path_3" />
+          </g>
+          <path
+             style="fill:#ffffff"
+             inkscape:connector-curvature="0"
+             d="m 25.666,81.683 c 10.737,0 19.965,-5.445 25.862,-7.56 A 33.591,33.591 0 0 1 61.966,72.2 V 72.171 L 5.7,72.608 c 0,0 3,9.075 19.966,9.075 z"
+             data-name="Path 4"
+             id="Path_4" />
+        </g>
+        <g
+           data-name="Group 3"
+           id="Group_3">
+          <path
+             style="fill:#2e3192"
+             inkscape:connector-curvature="0"
+             d="m 131.719,110.981 a 2.722,2.722 0 0 1 -2.719,-2.722 4.0845,4.0845 0 1 0 -8.169,0 2.7225,2.7225 0 0 1 -5.445,0 9.5295,9.5295 0 1 1 19.059,0 2.723,2.723 0 0 1 -2.726,2.722 z"
+             data-name="Path 5"
+             id="Path_5" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
