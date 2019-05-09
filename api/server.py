@@ -5,6 +5,7 @@ from flask_cors import CORS
 import json
 import logging
 import lib
+import robin
 
 app = Flask(__name__)
 CORS(app)
@@ -20,7 +21,7 @@ def failure(what):
 
 @app.route('/yesterday')
 def yesterday():
-  return success(lib.get_yesterday('ticker, open, close'))
+  return success(robin.get_yesterday('ticker, open, close'))
 
 if __name__ == '__main__':
   app.run(port=4001)
