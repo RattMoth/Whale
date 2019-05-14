@@ -1,3 +1,21 @@
+### Setting up
+
+This game works off of an SQLite database which gets set up automatically by running `api/update.py`, which "updates" to the schema  found in `api/db.py` and then gets recent quotes to populate it.
+
+Before you proceed however, you'll need [redis](https://redis.io) which maintains an http cache of the api results so we don't need to hit the server each time. 
+
+After that's installed and running you can run update.py as many times as you need. It won't put in duplicate records and the caching system will prevent you from naively hitting the api quota.
+
+After this is done. You can run server.py, which has the executable bit set:
+
+```
+ $ ./server.py
+```
+
+Currently the html game uses `document.location.host + :4100` to look up the server.  You'll have to separately host the game on something like apache, nginx or you can run `python3 -m http.server` in the `fe/web` directory to server it on port 8000
+
+### Design
+
 The overall design of the games:
 
 Mostly we are dealing with [SPAs](https://en.wikipedia.org/wiki/Single-page_application) which use a light amount of non-frameworked javascript and standard html/css.
