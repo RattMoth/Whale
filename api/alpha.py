@@ -7,18 +7,21 @@ import hashlib
 import lib
 
 # todo: move this key to some file
-key="DF0GV3M5L6N2IE5"
+key = "DF0GV3M5L6N2IE5"
+last = time.time()
 
 def historical(stockList):
+  global last
   for stock in stockList:
-    url="https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={}&apikey={}".format(stock, key)
-    resraw  = lib.cache_get(url)
+    url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={}&apikey={}".format(stock, key)
+    resraw = lib.cache_get(url, wait_until = last + 20)
+    last = time.time()
 
     resjson = json.loads(resraw)
     if "Note" in resjson:
-      resraw  = lib.cache_get(url, True)
+      resraw  = lib.cache_get(url, force = True, wait_until = last + 20)
+      last = time.time()
       resjson = json.loads(resraw)
-      time.sleep(13)
 
     if 'Time Series (Daily)' not in resjson:
       print(resraw)
