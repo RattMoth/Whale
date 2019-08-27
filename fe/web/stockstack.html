@@ -4,19 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
     <title>Stockpile! The fun stock picking game</title>
     <link rel="stylesheet" href="css/style.css"> 
   </head>
   <body>
-    <div class="stack-container">
-      <div class="header">
-        <h2>&#x1F5D1; Trash</h2>
-        <h3 class='performance trash'>?%</h3>
-      </div>
-      <ul id="trash" class="stack">
-      </ul>
-    </div>
 
     <div id="game">
       <h2>Which stock do you think did better today?</h2>
@@ -29,17 +22,18 @@
       </div>
       <div id="choice-container">
       </div>
+      <div id="win">
+      </div>
+      <div id="lose">
+        <div id=lose-text></div>
+        STARTING OVER!
+      </div>
+      <div id="streak-container"></div>
     </div>
 
-    <div class="stack-container">
-      <div class="header">
-        <h2>&#x1F4B0; Stash</h2>
-        <h3 class='performance stash'>?%</h3>
-      </div>
-      <ul id="stash" class="stack">
-      </ul>
-    </div>
-    <div id='whale'>
+    <div id='whale-container'>
+      <div id=whale-speak></div>
+      <img id=whale src=whale.svg>
       
     </div>
 

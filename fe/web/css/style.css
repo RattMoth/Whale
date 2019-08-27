@@ -1,6 +1,6 @@
 body {
   text-align: center;
-  background: rgb(166, 221, 255, 0.8);
+  background: #fff;/*rgb(166, 221, 255, 0.8);*/
   font-family: 'Noto Sans', sans-serif;;
 }
 
@@ -23,6 +23,37 @@ h4 {
 #game h2 {
   margin: 2rem 0;
   font-size: 2rem;
+}
+#streak-container {
+  font-size: 5vw;
+}
+#win,#lose {
+  position: absolute;
+  text-transform: uppercase;
+}
+
+#win > div,.lose {
+  font-family: 'Kaushan Script', cursive;
+  font-weight: bold;
+  color: green;
+  transition-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation: 1s;
+  animation-name: logo;
+}
+.lose {
+  color: red;
+}
+@keyframes logo {
+  0% { 
+  transform: rotate(0deg);
+  opacity: 0; font-size: 4vw; }
+  20% { opacity: 1}
+  30% { opacity: .5}
+  50% { opacity: .1}
+  100% { 
+  transform: rotate(-20deg);
+  opacity: 0; font-size: 12vw; }
 }
 .choice {
   width: 15rem;
@@ -186,11 +217,40 @@ circle {
   text-align: center;
   width: 100%;
 }
-#whale {
+#whale-container {
   position: fixed;
   bottom: 0;
   right: 0;
-  width: 250px;
-  height: 200px;
-  background: url('../whale.svg') center center no-repeat;
+  animation-fill-mode: forwards;
+  animation: 20s;
+  animation-name: whalemove;
+}
+@keyframes whalemove {
+  0% { right: 0; }
+  100% {  right: 100%; }
+}
+
+#whale { 
+  width: 15vw ;
+  animation: upDown .5s alternate infinite ease-in-out;
+}
+@keyframes upDown {
+  to { transform: translatey(20px) scalex(0.97) rotate(5deg);}
+}
+#whale-speak {
+  font-family: 'Kaushan Script', cursive;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 5vw;
+  right:15vw;
+  padding: 1vw;
+  min-width: 15vw;
+  min-height: 5vw;
+  color: #004E7D;
+  font-size: 2.5vw;
+  background: #a6ddff;
+  border-radius: 2vw;
+  text-align: center;
 }

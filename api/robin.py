@@ -13,13 +13,15 @@ import db
 my_trader = Robinhood()
 
 def login(who=False, force=False):
+  password = 'Norm1066$fixy2k'
+  who='kristopolous@yahoo.com'
   if not who:
     who = db.user['email']
 
   token = lib.r.hget('auth', who)
   db.user['email'] = who
   if not token or force:
-    password = getpass.getpass()
+    #:password = getpass.getpass()
     try:
       my_trader.login(username=who, password=password)
 

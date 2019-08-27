@@ -3,10 +3,42 @@ var
   trash = [], 
   stash = [],
   chooser,
+  Streak = 0,
+  ZeroTime = 3,
+  time_between = ZeroTime,
   HistoricalMap = {},
   Game = {
     round: -1
   },
+  last = {
+    lose: 0,
+    compliment: 0,
+    insult: 0
+  },
+  phrases = {
+    index: {},
+    loseList: [
+      "You drowned",
+      "Beached whale",
+      "We caught you",
+      "Go Fish!"
+    ],
+    complimentList: [
+      "That was easy",
+      "Finally that loser stopped playing",
+      "I'm really a catfish",
+      "You're krilling it",
+    ],
+    insultList: [
+      "Gee you're terrible at this!",
+      "I can do better and I don't have hands",
+      "Your finger must have slipped",
+      "Stop smoking the seaweed",
+      "My mom's a whale too",
+      "You suck like my blowhole",
+      "I wish I could drown"
+    ]
+  },  
   ev = EvDa(),
   CompanyList = [
     [['AAPL', 'Apple'], ['MSFT', 'Microsoft']],
@@ -24,25 +56,39 @@ var
     [['PM', 'Philip Morris'], ['PLNT', 'Planet Fitness']]
   ];
 
-function whoami() {
+function iter(what) {
+  phrases.index[what] = ( phrases.index[what] + 1 ) % phrases[what].length;
+  return phrases[what][phrases.index[what]];
 }
 
 function render() {
-  var list = [];
-  trash.forEach(function(row) {
-    if(!row.rendered) {
-      row.rendered = true;
-      $("#trash").prepend(Template.stack({item: row}));
-    }
-  });
-      
-  stash.forEach(function(row) {
-    if(!row.rendered) {
-      row.rendered = true;
-      $("#stash").prepend(Template.stack({item: row}));
-    }
-  });
+  if(Streak > 0) {
+    $("#win").append("<div>+1</div>");
+    $("#whale-speak").html(iter('complimentList'));
+  } else {
+    $("#lose").addClass('lose');
+    $("#whale-speak").html(iter('loseList'));
+  }
 
+  $("#streak-container").html(Streak);
+}
+
+function shuffle(array) {
+  var m = array.length, t, i;
+
+  // While there remain elements to shuffle…
+  while (m) {
+
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+
+  return array;
 }
 
 function remove(tuple, set) {
@@ -61,26 +107,32 @@ function add(tuple, set) {
   return set;
 }
 
+function win() {
+  time_between *= 0.9;
+  Streak ++;
+}
+function lose() {
+  time_between = ZeroTime;
+  Streak = 0;
+}
 function pick(index, which) {
   // make sure they are out of the list
   remove(CompanyList[index][0]); 
   remove(CompanyList[index][1]); 
 
   var 
-    stash_ix = which,
+  stash_ix = which,
     trash_ix = (which + 1) % 2;
 
-  stash = add(CompanyList[index][stash_ix], stash); 
-  trash = add(CompanyList[index][trash_ix], trash); 
-}
+  var 
+  chosen = CompanyList[index][stash_ix][0],
+    not_chosen = CompanyList[index][trash_ix][0];
 
-function load() {
-}
-
-function save() {
-}
-
-function reset() {
+  if(HistoricalMap[chosen] >  HistoricalMap[not_chosen]) {
+    win();
+  } else {
+    lose();
+  }
 }
 
 function relative_percent(what) {
@@ -147,17 +199,19 @@ function nextRound() {
     return endGame();
   }
 
-  var timer_ix = 5;
+  var timer_ix = parseFloat(time_between.toFixed(1));
   if(chooser) {
     clearInterval(chooser);
   }
   $('#counter').html(timer_ix);
   chooser = setInterval(function(){
     timer_ix --;
-    $('#counter').html(timer_ix);
-    if(timer_ix == -1) {
+    $('#counter').html(timer_ix.toFixed(1));
+    if(timer_ix < 0) {
       clearInterval(chooser);
-      choose(Game.round, Math.round(Math.random()));
+      lose();
+      render();
+      return nextRound();
     }
   }, 1000);
 
@@ -165,13 +219,6 @@ function nextRound() {
     Template.choice({ix: Game.round, choice: CompanyList[Game.round] })
   );
   return true;
-}
-
-function autoplay() {
-  function guess() {
-    return Math.round(Math.random());
-  }
-  while( choose(Game.round, guess()) );
 }
 
 function loadTemplates() {
@@ -208,11 +255,18 @@ function getYesterday() {
   });
 }
 
+function shufflePhrases() {
+  for(var x in phrases) {
+    phrases[x] = shuffle(phrases[x]);
+    phrases.index[x] = 0;
+  }
+}
 
 $(function(){
   getYesterday();
   loadTemplates();
+  shufflePhrases();
   nextRound();
-  //setTimeout(autoplay, 500);
+  render();
 });
 
