@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+@keyframes scrollLeft {
+  from { background-position: 9000px; }
+  to { background-position: 0px; }
+}
+
+@-webkit-keyframes scrollLeft {
+  from { background-position: 9000px; }
+  to { background-position: 0px; } 
+}
+
+@keyframes foregroundScroll {
+  from{ transform: translateX(0vw)}
+  to { transform: translateX(99vw)}
+}
+
+.ocean-bg {
+  background-image: url('../background-images/ocean.jpg');
+  background-repeat: repeat-x;
+  animation: scrollLeft 1000s infinite linear;
+  -webkit-animation: scrollLeft 1000s infinite linear;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
+}
+
+.ocean-front {
+  background-image: url('../background-images/ocean-floor.png');
+  background-repeat: repeat-x;
+  animation: scrollLeft 300s infinite linear;
+  -webkit-animation: scrollLeft 300s infinite linear;
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  height: 40vh;
+}
