@@ -38,4 +38,5 @@ body {
   bottom: 0;
   width: 100vw;
   height: 40vh;
+  z-index: -1;
 }
