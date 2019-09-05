@@ -7,11 +7,16 @@
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
     <title>Stockpile! The fun stock picking game</title>
+    <link rel="stylesheet" href="css/background-style.css"> 
     <link rel="stylesheet" href="css/style.css"> 
   </head>
   <body>
 
-    <div id="game">
+    <div class="ocean-bg"></div>
+    <div class="ocean-front"></div>
+    <div id="game-container">
+
+      <div id="game">
       <h2>Which stock do you think did better today?</h2>
       <div id=timer>
         <div id='counter'>
@@ -31,6 +36,7 @@
       <div id="streak-container"></div>
     </div>
 
+    </div>
     <div id='whale-container'>
       <div id=whale-speak></div>
       <img id=whale src=whale.svg>
