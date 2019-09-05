@@ -3,18 +3,18 @@ let trash = [];
 let stash = [];
 let chooser;
 let Streak = 0;
-let ZeroTime = 3;
+const ZeroTime = 3;
 let time_between = ZeroTime;
-let HistoricalMap = {};
-let Game = {
+const HistoricalMap = {};
+const Game = {
   round: -1,
 };
-let last = {
+const last = {
   lose: 0,
   compliment: 0,
   insult: 0,
 };
-let phrases = {
+const phrases = {
   index: {},
   loseList: [
     'You drowned',
@@ -38,8 +38,8 @@ let phrases = {
     'I wish I could drown',
   ],
 };
-let ev = EvDa();
-let CompanyList = [
+const ev = EvDa();
+const CompanyList = [
   [['AAPL', 'Apple'], ['MSFT', 'Microsoft']],
   [['SNAP', 'Snapchat'], ['FB', 'Facebook']],
   [['PEP', 'Pepsi'], ['KO', 'Coke']],
@@ -62,10 +62,12 @@ function iter(what) {
 
 function render() {
   if (Streak > 0) {
-    $('#win').append('<div>+1</div>');
+    $('#win').append('<div class="plus">+1</div>');
+    $('.plus').on('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function () { $(this).css('display', 'none'); });
     $('#whale-speak').html(iter('complimentList'));
   } else {
     $('#lose').addClass('lose');
+    $('.lose').on('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function () { $(this).css('display', 'none'); });
     $('#whale-speak').html(iter('loseList'));
   }
 
@@ -95,7 +97,7 @@ function remove(tuple, set) {
     trash = remove(tuple, trash);
     stash = remove(tuple, stash);
   } else {
-    return set.filter((row) => row[0] !== tuple[0]);
+    return set.filter(row => row[0] !== tuple[0]);
   }
 }
 
@@ -119,11 +121,11 @@ function pick(index, which) {
 
   const
     stash_ix = which;
-  let trash_ix = (which + 1) % 2;
+  const trash_ix = (which + 1) % 2;
 
   const
     chosen = CompanyList[index][stash_ix][0];
-  let not_chosen = CompanyList[index][trash_ix][0];
+  const not_chosen = CompanyList[index][trash_ix][0];
 
   if (HistoricalMap[chosen] > HistoricalMap[not_chosen]) {
     win();
@@ -136,7 +138,7 @@ function relative_percent(what) {
   const rel = Math.round((1 - what) * 100 * 100);
   let str = (rel / 100).toFixed(2);
   if (rel > 0) {
-    str = `+${ str}`;
+    str = `+${str}`;
   }
   return `${str}%`;
 }
@@ -144,7 +146,7 @@ function relative_percent(what) {
 function doPercent(what, percent) {
   percent += 1;
   console.log(what, percent, relative_percent(percent));
-  $(`.performance.${  what}`).html(relative_percent(percent));
+  $(`.performance.${what}`).html(relative_percent(percent));
 }
 
 function endGame() {
@@ -159,12 +161,12 @@ function endGame() {
   for (const ticker in HistoricalMap) {
     const change = HistoricalMap[ticker][2];
     const perc = 100 * (max - change) / (max - min);
-    $(`.performance.${  ticker}`).html(Math.round(perc / 10));
+    $(`.performance.${ticker}`).html(Math.round(perc / 10));
     HistoricalMap[ticker][3] = Math.round(perc / 10);
 
     console.log(change, perc, max, min);
-    $(`.perf-container.${  ticker  } .waves`).css('height', `${perc }%`);
-    $(`.perf-container.${  ticker  } .performance`).css('bottom', 0`${0.25 + 0.5 * perc}%`);
+    $(`.perf-container.${ticker} .waves`).css('height', `${perc}%`);
+    $(`.perf-container.${ticker} .performance`).css('bottom', 0`${0.25 + 0.5 * perc}%`);
   }
 
   const stashTotal = stash.reduce((ix, row) => HistoricalMap[row[0]][3] + ix, 0);
@@ -218,7 +220,7 @@ function loadTemplates() {
   $('#template > *').each(function () {
     const id = this.id.slice(2);
     Template[id] = _.template(this.innerHTML);
-    console.log(`>> template ${  id}`);
+    console.log(`>> template ${id}`);
   });
 }
 
@@ -241,9 +243,9 @@ function get(url, cb) {
 
 function getYesterday() {
   get('yesterday', (data) => {
-    let res = JSON.parse(data);
+    const res = JSON.parse(data);
     res.data.forEach((row) => {
-      let openClose = row.slice(1);
+      const openClose = row.slice(1);
       openClose.push(openClose[1] / openClose[0]);
       HistoricalMap[row[0]] = openClose;
     });
