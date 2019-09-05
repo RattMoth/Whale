@@ -32,7 +32,7 @@ h4 {
   font-size: 5vw;
 }
 #win,#lose {
-  position: absolute;
+  /* position: absolute; */
   text-transform: uppercase;
 }
 
