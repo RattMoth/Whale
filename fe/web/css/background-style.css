@@ -19,7 +19,7 @@ body {
 }
 
 .ocean-bg {
-  background-image: url('../background-images/ocean2.jpg');
+  background-image: url('../background-images/ocean.jpg');
   background-repeat: repeat-x;
   animation: scrollLeft 1000s infinite linear;
   -webkit-animation: scrollLeft 1000s infinite linear;
@@ -30,7 +30,7 @@ body {
 }
 
 .ocean-front {
-  background-image: url('../background-images/ocean-floor3.png');
+  background-image: url('../background-images/ocean-floor-repeat.png');
   background-repeat: repeat-x;
   animation: scrollLeft 300s infinite linear;
   -webkit-animation: scrollLeft 300s infinite linear;
