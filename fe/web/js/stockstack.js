@@ -228,7 +228,7 @@ function get(url, cb) {
   const http = new XMLHttpRequest();
 
   // Gets hostname and removes port
-  const hostname = document.location.host.replace(/:\d{4}/, '');
+  const hostname = document.location.host.replace(/:\d{4}/, '') || "localhost";
 
   http.open('GET', `http://${hostname}:4001/${url}`, true);
   http.setRequestHeader('Content-type', 'application/json');

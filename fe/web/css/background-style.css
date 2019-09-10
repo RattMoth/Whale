@@ -30,13 +30,13 @@ body {
 }
 
 .ocean-front {
-  background-image: url('../background-images/ocean-floor-repeat2.png');
+  background: url('../background-images/seafloor.svg') bottom right;
   background-repeat: repeat-x;
   animation: scrollLeft 300s infinite linear;
   -webkit-animation: scrollLeft 300s infinite linear;
   position: absolute;
-  bottom: 0;
+  bottom: 0%;
   width: 100vw;
-  height: 412px;
+  height: 50%;
   z-index: -1;
 }
