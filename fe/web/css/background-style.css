@@ -19,7 +19,7 @@ body {
 }
 
 .ocean-bg {
-  background-image: url('../background-images/ocean.jpg');
+  background-image: url('../background-images/ocean-repeat.png');
   background-repeat: repeat-x;
   animation: scrollLeft 1000s infinite linear;
   -webkit-animation: scrollLeft 1000s infinite linear;
@@ -30,13 +30,13 @@ body {
 }
 
 .ocean-front {
-  background-image: url('../background-images/ocean-floor.png');
+  background-image: url('../background-images/ocean-floor-repeat2.png');
   background-repeat: repeat-x;
   animation: scrollLeft 300s infinite linear;
   -webkit-animation: scrollLeft 300s infinite linear;
   position: absolute;
   bottom: 0;
   width: 100vw;
-  height: 40vh;
+  height: 412px;
   z-index: -1;
 }
