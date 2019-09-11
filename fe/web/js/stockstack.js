@@ -3,7 +3,7 @@ let trash = [];
 let stash = [];
 let chooser;
 let Streak = 0;
-const ZeroTime = 3;
+const ZeroTime = 10;
 let time_between = ZeroTime;
 const HistoricalMap = {};
 const Game = {
@@ -119,8 +119,7 @@ function pick(index, which) {
   remove(CompanyList[index][0]);
   remove(CompanyList[index][1]);
 
-  const
-    stash_ix = which;
+  const stash_ix = which;
   const trash_ix = (which + 1) % 2;
 
   const
@@ -228,7 +227,7 @@ function get(url, cb) {
   const http = new XMLHttpRequest();
 
   // Gets hostname and removes port
-  const hostname = document.location.host.replace(/:\d{4}/, '') || "localhost";
+  const hostname = document.location.host.replace(/:\d{4}/, '') || 'localhost';
 
   http.open('GET', `http://${hostname}:4001/${url}`, true);
   http.setRequestHeader('Content-type', 'application/json');

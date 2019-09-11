@@ -23,5 +23,9 @@ def failure(what):
 def yesterday():
   return success(robin.get_yesterday('ticker, open, close'))
 
+@app.route('/month')
+def month():
+  return success(robin.get_month('ticker, open, close'))
+
 if __name__ == '__main__':
   app.run(port=4001)

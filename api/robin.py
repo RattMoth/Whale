@@ -208,4 +208,5 @@ def positions():
 def get_yesterday(fields = '*'):
   return db.run('select {} from historical group by ticker order by begin desc'.format(fields)).fetchall()
 
-
+def get_month(fields = '*') :
+ return db.run(f"SELECT {fields} FROM historical WHERE begin BETWEEN '2019-07-01' and '2019-07-07' GROUP BY ticker ORDER BY begin desc;").fetchall()
