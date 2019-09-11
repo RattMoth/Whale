@@ -27,5 +27,9 @@ def yesterday():
 def month():
   return success(robin.get_month('ticker, open, close'))
 
+@app.route('/year')
+def year():
+  return success(robin.get_year('ticker, open, close'))
+
 if __name__ == '__main__':
   app.run(port=4001)
