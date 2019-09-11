@@ -206,10 +206,15 @@ def positions():
   return {'computed': computed, 'positions': positionList }
 
 def get_yesterday(fields = '*'):
-  return db.run('select {} from historical group by ticker order by begin desc'.format(fields)).fetchall()
+  return db.run("select {} FROM historical WHERE begin='2019-09-10' GROUP BY ticker ORDER BY begin desc".format(fields)).fetchall()
 
 def get_month(fields = '*') :
- return db.run(f"SELECT {fields} FROM historical WHERE begin BETWEEN '2019-07-01' and '2019-07-07' GROUP BY ticker ORDER BY begin desc").fetchall()
+ return db.run(f"SELECT {fields} FROM historical WHERE begin BETWEEN '2019-08-01' and '2019-08-07' GROUP BY ticker ORDER BY begin desc").fetchall()
+
+#  Hardcoded dates will be changed to variables based on current date -1 month or -1 year
+#  yesterday = (datetime.datetime.today() - datetime.timedelta(days=1)).strftime('%Y-%m-%d')
+#  month = (datetime.datetime.today() - datetime.timedelta(days=(365/12))).strftime('%Y-%m-%d')
+#  year = (datetime.datetime.today() - datetime.timedelta(days=365)).strftime('%Y-%m-%d')
 
 def get_year(fields = '*') :
- return db.run(f"SELECT {fields} FROM historical WHERE begin BETWEEN '2018-08-01' and '2018-08-31' GROUP BY ticker ORDER BY begin desc").fetchall()
+ return db.run(f"SELECT {fields} FROM historical WHERE begin BETWEEN '2018-09-01' and '2018-09-31' GROUP BY ticker ORDER BY begin desc").fetchall()

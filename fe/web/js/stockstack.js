@@ -5,7 +5,11 @@ let chooser;
 let Streak = 0;
 const ZeroTime = 10;
 let time_between = ZeroTime;
-const HistoricalMap = {};
+const HistoricalMap = {
+  yesterday: [],
+  month: [],
+  year: [],
+};
 const Game = {
   round: -1,
 };
@@ -126,7 +130,7 @@ function pick(index, which) {
     chosen = CompanyList[index][stash_ix][0];
   const not_chosen = CompanyList[index][trash_ix][0];
 
-  if (HistoricalMap[chosen] > HistoricalMap[not_chosen]) {
+  if (HistoricalMap.yesterday[chosen] > HistoricalMap.yesterday[not_chosen]) {
     win();
   } else {
     lose();
@@ -154,22 +158,22 @@ function endGame() {
   );
   clearInterval(chooser);
   $('#timer').hide();
-  const max = Math.max.apply(0, Object.values(HistoricalMap).map(a => a[2]));
-  const min = Math.min.apply(0, Object.values(HistoricalMap).map(a => a[2]));
+  const max = Math.max.apply(0, Object.values(HistoricalMap.yesterday).map(a => a[2]));
+  const min = Math.min.apply(0, Object.values(HistoricalMap.yesterday).map(a => a[2]));
 
-  for (const ticker in HistoricalMap) {
-    const change = HistoricalMap[ticker][2];
+  for (const ticker in HistoricalMap.yesterday) {
+    const change = HistoricalMap.yesterday[ticker][2];
     const perc = 100 * (max - change) / (max - min);
     $(`.performance.${ticker}`).html(Math.round(perc / 10));
-    HistoricalMap[ticker][3] = Math.round(perc / 10);
+    HistoricalMap.yesterday[ticker][3] = Math.round(perc / 10);
 
     console.log(change, perc, max, min);
     $(`.perf-container.${ticker} .waves`).css('height', `${perc}%`);
     $(`.perf-container.${ticker} .performance`).css('bottom', 0`${0.25 + 0.5 * perc}%`);
   }
 
-  const stashTotal = stash.reduce((ix, row) => HistoricalMap[row[0]][3] + ix, 0);
-  const trashTotal = trash.reduce((ix, row) => HistoricalMap[row[0]][3] + ix, 0);
+  const stashTotal = stash.reduce((ix, row) => HistoricalMap.yesterday[row[0]][3] + ix, 0);
+  const trashTotal = trash.reduce((ix, row) => HistoricalMap.yesterday[row[0]][3] + ix, 0);
   $('.performance.stash').html(stashTotal);
   $('.performance.trash').html(trashTotal);
   $('.performance.final').html(stashTotal - trashTotal);
@@ -240,16 +244,34 @@ function get(url, cb) {
   http.send();
 }
 
-function getYesterday() {
+function getHistorical() {
   get('yesterday', (data) => {
     const res = JSON.parse(data);
     res.data.forEach((row) => {
       const openClose = row.slice(1);
       openClose.push(openClose[1] / openClose[0]);
-      HistoricalMap[row[0]] = openClose;
+      HistoricalMap.yesterday[row[0]] = openClose;
     });
-    console.log(HistoricalMap);
   });
+
+  get('month', (data) => {
+    const res = JSON.parse(data);
+    res.data.forEach((row) => {
+      const openClose = row.slice(1);
+      openClose.push(openClose[1] / openClose[0]);
+      HistoricalMap.month[row[0]] = openClose;
+    });
+  });
+
+  get('year', (data) => {
+    const res = JSON.parse(data);
+    res.data.forEach((row) => {
+      const openClose = row.slice(1);
+      openClose.push(openClose[1] / openClose[0]);
+      HistoricalMap.year[row[0]] = openClose;
+    });
+  });
+  console.log(HistoricalMap);
 }
 
 function shufflePhrases() {
@@ -260,7 +282,7 @@ function shufflePhrases() {
 }
 
 $(() => {
-  getYesterday();
+  getHistorical();
   loadTemplates();
   shufflePhrases();
   nextRound();
