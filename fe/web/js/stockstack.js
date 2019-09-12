@@ -5,6 +5,7 @@ let chooser;
 let Streak = 0;
 const ZeroTime = 10;
 let time_between = ZeroTime;
+let timeframe = 'year';
 const HistoricalMap = {
   yesterday: [],
   month: [],
@@ -44,6 +45,11 @@ const phrases = {
 };
 const ev = EvDa();
 const CompanyList = [
+  [['TWTR', 'Twitter'], ['SNAP', 'Snapchat']],
+  [['VZ', 'Verizon'], ['PLNT', 'Planet Fitness']],
+  [['DIS', 'Disney'], ['V', 'Visa']],
+  [['GRPN', 'Groupon'], ['WMT', 'Walmart']],
+  [['TSLA', 'Tesla'], ['PYPL', 'PayPal']],
   [['AAPL', 'Apple'], ['MSFT', 'Microsoft']],
   [['SNAP', 'Snapchat'], ['FB', 'Facebook']],
   [['PEP', 'Pepsi'], ['KO', 'Coke']],
@@ -126,11 +132,13 @@ function pick(index, which) {
   const stash_ix = which;
   const trash_ix = (which + 1) % 2;
 
-  const
-    chosen = CompanyList[index][stash_ix][0];
+  const chosen = CompanyList[index][stash_ix][0];
   const not_chosen = CompanyList[index][trash_ix][0];
 
-  if (HistoricalMap.yesterday[chosen] > HistoricalMap.yesterday[not_chosen]) {
+  // Compare HistoricalMap openclose values?
+  // What is being compared currently?
+  // If switched to HistoricalMap[timeframe][chosen][2], how will empty values be avoided?
+  if (HistoricalMap[timeframe][chosen] > HistoricalMap[timeframe][not_chosen]) {
     win();
   } else {
     lose();
@@ -158,22 +166,22 @@ function endGame() {
   );
   clearInterval(chooser);
   $('#timer').hide();
-  const max = Math.max.apply(0, Object.values(HistoricalMap.yesterday).map(a => a[2]));
-  const min = Math.min.apply(0, Object.values(HistoricalMap.yesterday).map(a => a[2]));
+  const max = Math.max.apply(0, Object.values(HistoricalMap[timeframe]).map(a => a[2]));
+  const min = Math.min.apply(0, Object.values(HistoricalMap[timeframe]).map(a => a[2]));
 
-  for (const ticker in HistoricalMap.yesterday) {
-    const change = HistoricalMap.yesterday[ticker][2];
+  for (const ticker in HistoricalMap[timeframe]) {
+    const change = HistoricalMap[timeframe][ticker][2];
     const perc = 100 * (max - change) / (max - min);
     $(`.performance.${ticker}`).html(Math.round(perc / 10));
-    HistoricalMap.yesterday[ticker][3] = Math.round(perc / 10);
+    HistoricalMap[timeframe][ticker][3] = Math.round(perc / 10);
 
     console.log(change, perc, max, min);
     $(`.perf-container.${ticker} .waves`).css('height', `${perc}%`);
     $(`.perf-container.${ticker} .performance`).css('bottom', 0`${0.25 + 0.5 * perc}%`);
   }
 
-  const stashTotal = stash.reduce((ix, row) => HistoricalMap.yesterday[row[0]][3] + ix, 0);
-  const trashTotal = trash.reduce((ix, row) => HistoricalMap.yesterday[row[0]][3] + ix, 0);
+  const stashTotal = stash.reduce((ix, row) => HistoricalMap[timeframe][row[0]][3] + ix, 0);
+  const trashTotal = trash.reduce((ix, row) => HistoricalMap[timeframe][row[0]][3] + ix, 0);
   $('.performance.stash').html(stashTotal);
   $('.performance.trash').html(trashTotal);
   $('.performance.final').html(stashTotal - trashTotal);
@@ -192,6 +200,20 @@ function nextRound() {
     return false;
   }
   Game.round += 1;
+
+  // Increase difficulty to month
+  if (Game.round === 3) {
+    timeframe = 'month';
+    $('#didBetter').html('Which stock did better last month?');
+    console.log('timeframe changed to month');
+  }
+
+  // Increase difficulty to year
+  if (Game.round === 6) {
+    timeframe = 'yesterday';
+    $('#didBetter').html('What about yesterday?');
+    console.log('timeframe changed to yesterday');
+  }
 
   if (Game.round >= CompanyList.length) {
     return endGame();
