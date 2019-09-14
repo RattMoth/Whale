@@ -16,7 +16,6 @@ def historical(stockList):
     duration *= (60 * 24) 
     for stock in stockList:
       url = "https://www.alphavantage.co/query?function=TIME_SERIES_{}_ADJUSTED&symbol={}&apikey={}".format(name, stock, key)
-      print(url)
       resraw = lib.cache_get(url, wait_until = last + 20)
       last = time.time()
 

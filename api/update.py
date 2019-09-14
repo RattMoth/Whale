@@ -4,14 +4,20 @@ import alpha
 
 lib.upgrade()
 alpha.historical([
+  "BAC",
+  "F",
+  "GM",
   "WFC",
-  "RDS.A",
   "V",
   "VZ",
-  "VW",
   "TWTR",
   "GE",
   "GRPN",
+  "PFE",
+  "CVX",
+  "JPM",
+  "JNJ",
+  "MMM",
   "UBER",
 
   "AAPL","MSFT","SNAP","FB","PEP","KO","TSLA","XOM","AMZN","WMT","NFLX","DIS","GOOG","BIDU","V","PYPL","PM","PLNT"])
