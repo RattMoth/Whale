@@ -135,10 +135,7 @@ function pick(index, which) {
   const chosen = CompanyList[index][stash_ix][0];
   const not_chosen = CompanyList[index][trash_ix][0];
 
-  // Compare HistoricalMap openclose values?
-  // What is being compared currently?
-  // If switched to HistoricalMap[timeframe][chosen][2], how will empty values be avoided?
-  if (HistoricalMap[timeframe][chosen] > HistoricalMap[timeframe][not_chosen]) {
+  if (HistoricalMap[timeframe][chosen][2] > HistoricalMap[timeframe][not_chosen][2]) {
     win();
   } else {
     lose();
@@ -259,7 +256,7 @@ function get(url, cb) {
   http.setRequestHeader('Content-type', 'application/json');
 
   http.onreadystatechange = function () {
-    if (http.readyState == 4 && http.status == 200) {
+    if (http.readyState === 4 && http.status === 200) {
       cb(http.responseText);
     }
   };
@@ -267,32 +264,31 @@ function get(url, cb) {
 }
 
 function getHistorical() {
-  get('yesterday', (data) => {
+  get('dates', (data) => {
     const res = JSON.parse(data);
-    res.data.forEach((row) => {
+
+    // get yesterday
+    res.data[0].forEach((row) => {
       const openClose = row.slice(1);
       openClose.push(openClose[1] / openClose[0]);
       HistoricalMap.yesterday[row[0]] = openClose;
     });
-  });
 
-  get('month', (data) => {
-    const res = JSON.parse(data);
-    res.data.forEach((row) => {
+    // get month
+    res.data[1].forEach((row) => {
       const openClose = row.slice(1);
       openClose.push(openClose[1] / openClose[0]);
       HistoricalMap.month[row[0]] = openClose;
     });
-  });
 
-  get('year', (data) => {
-    const res = JSON.parse(data);
-    res.data.forEach((row) => {
+    // get year
+    res.data[2].forEach((row) => {
       const openClose = row.slice(1);
       openClose.push(openClose[1] / openClose[0]);
       HistoricalMap.year[row[0]] = openClose;
     });
   });
+
   console.log(HistoricalMap);
 }
 
