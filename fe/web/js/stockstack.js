@@ -44,26 +44,27 @@ const phrases = {
   ],
 };
 const ev = EvDa();
-const CompanyList = [
-  [['TWTR', 'Twitter'], ['SNAP', 'Snapchat']],
-  [['VZ', 'Verizon'], ['PLNT', 'Planet Fitness']],
-  [['DIS', 'Disney'], ['V', 'Visa']],
-  [['GRPN', 'Groupon'], ['WMT', 'Walmart']],
-  [['TSLA', 'Tesla'], ['PYPL', 'PayPal']],
-  [['AAPL', 'Apple'], ['MSFT', 'Microsoft']],
-  [['SNAP', 'Snapchat'], ['FB', 'Facebook']],
-  [['PEP', 'Pepsi'], ['KO', 'Coke']],
-  [['TSLA', 'Tesla'], ['XOM', 'Exxon Mobil']],
-  [['AMZN', 'Amazon'], ['WMT', 'Walmart']],
+let CompanyList = [];
+// const CompanyList = [
+//   [['TWTR', 'Twitter'], ['SNAP', 'Snapchat']],
+//   [['VZ', 'Verizon'], ['PLNT', 'Planet Fitness']],
+//   [['DIS', 'Disney'], ['V', 'Visa']],
+//   [['GRPN', 'Groupon'], ['WMT', 'Walmart']],
+//   [['TSLA', 'Tesla'], ['PYPL', 'PayPal']],
+//   [['AAPL', 'Apple'], ['MSFT', 'Microsoft']],
+//   [['SNAP', 'Snapchat'], ['FB', 'Facebook']],
+//   [['PEP', 'Pepsi'], ['KO', 'Coke']],
+//   [['TSLA', 'Tesla'], ['XOM', 'Exxon Mobil']],
+//   [['AMZN', 'Amazon'], ['WMT', 'Walmart']],
 
-  // Maybe not disney?
-  [['NFLX', 'Netflix'], ['DIS', 'Disney']],
+//   // Maybe not disney?
+//   [['NFLX', 'Netflix'], ['DIS', 'Disney']],
 
-  // A better one for the goog would be nice.
-  [['GOOG', 'Google'], ['BIDU', 'Baidu']],
-  [['V', 'Visa'], ['PYPL', 'PayPal']],
-  [['PM', 'Philip Morris'], ['PLNT', 'Planet Fitness']],
-];
+//   // A better one for the goog would be nice.
+//   [['GOOG', 'Google'], ['BIDU', 'Baidu']],
+//   [['V', 'Visa'], ['PYPL', 'PayPal']],
+//   [['PM', 'Philip Morris'], ['PLNT', 'Planet Fitness']],
+// ];
 
 function iter(what) {
   phrases.index[what] = (phrases.index[what] + 1) % phrases[what].length;
@@ -299,8 +300,30 @@ function shufflePhrases() {
   }
 }
 
+function getNames() {
+  const tickerList = [];
+  const hostname = document.location.host.replace(/:\d{4}/, '') || 'localhost';
+
+  for (const ticker in HistoricalMap.year) {
+    if (ticker !== undefined) {
+      tickerList.push([ticker]);
+    }
+  }
+
+  fetch(`http://${hostname}:4001/names`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(tickerList),
+  })
+    .then(res => res.json())
+    .then(data => CompanyList = data);
+
+  console.log(CompanyList);
+}
+
 $(() => {
   getHistorical();
+  getNames();
   loadTemplates();
   shufflePhrases();
   nextRound();

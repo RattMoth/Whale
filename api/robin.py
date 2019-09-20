@@ -214,6 +214,7 @@ def get_dates(fields = '*'):
 
   return(yesterday, month, year)
 
-# def get_names(nameList = ['MSFT', 'TLSA', 'F', 'V']):
-#   for name in nameList:
-#     lib.ticker2name(name)
+def get_names(nameList):
+  for nameArr in nameList:
+    nameArr.insert(1, lib.ticker2name(nameArr[0]))
+  return nameList

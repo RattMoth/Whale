@@ -23,5 +23,11 @@ def failure(what):
 def dates():
   return success(robin.get_dates('ticker, open, close'))
 
+@app.route('/names', methods=['POST'])
+def names():
+  ticker_list = request.get_json()
+  print(request.get_json())
+  return json.dumps(robin.get_names(ticker_list)), 200
+
 if __name__ == '__main__':
   app.run(port=4001)
