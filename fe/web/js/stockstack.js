@@ -264,6 +264,27 @@ function get(url, cb) {
   http.send();
 }
 
+function getNames() {
+  const tickerList = [];
+  const hostname = document.location.host.replace(/:\d{4}/, '') || 'localhost';
+
+  for (const ticker in HistoricalMap.year) {
+    if (ticker !== undefined) {
+      tickerList.push([ticker]);
+    }
+  }
+
+  fetch(`http://${hostname}:4001/names`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(tickerList),
+  })
+    .then(res => res.json())
+    .then(data => CompanyList = data);
+
+  console.log('getNames: CompanyList', CompanyList);
+}
+
 function getHistorical() {
   get('dates', (data) => {
     const res = JSON.parse(data);
@@ -288,9 +309,11 @@ function getHistorical() {
       openClose.push(openClose[1] / openClose[0]);
       HistoricalMap.year[row[0]] = openClose;
     });
+
+    getNames();
   });
 
-  console.log(HistoricalMap);
+  console.log('getHistorical: HistoricalMap', HistoricalMap);
 }
 
 function shufflePhrases() {
@@ -300,30 +323,8 @@ function shufflePhrases() {
   }
 }
 
-function getNames() {
-  const tickerList = [];
-  const hostname = document.location.host.replace(/:\d{4}/, '') || 'localhost';
-
-  for (const ticker in HistoricalMap.year) {
-    if (ticker !== undefined) {
-      tickerList.push([ticker]);
-    }
-  }
-
-  fetch(`http://${hostname}:4001/names`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(tickerList),
-  })
-    .then(res => res.json())
-    .then(data => CompanyList = data);
-
-  console.log(CompanyList);
-}
-
 $(() => {
   getHistorical();
-  getNames();
   loadTemplates();
   shufflePhrases();
   nextRound();
