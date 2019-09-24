@@ -214,7 +214,4 @@ def get_dates(fields = '*'):
 
   return(yesterday, month, year)
 
-def get_names(nameList):
-  for nameArr in nameList:
-    nameArr.insert(1, lib.ticker2name(nameArr[0]))
-  return nameList
+get_names = lambda nameList: [ lib.ticker2name(x) for x in nameList ]

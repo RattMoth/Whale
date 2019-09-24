@@ -6,6 +6,7 @@ let Streak = 0;
 const ZeroTime = 10;
 let time_between = ZeroTime;
 let timeframe = 'year';
+let nameList = {};
 const HistoricalMap = {
   yesterday: [],
   month: [],
@@ -264,23 +265,18 @@ function get(url, cb) {
   http.send();
 }
 
-function getNames() {
-  const tickerList = [];
+function getNames(cb) {
   const hostname = document.location.host.replace(/:\d{4}/, '') || 'localhost';
 
-  for (const ticker in HistoricalMap.year) {
-    if (ticker !== undefined) {
-      tickerList.push([ticker]);
-    }
-  }
 
   fetch(`http://${hostname}:4001/names`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(tickerList),
+    body: JSON.stringify(Object.keys(nameList)),
   })
     .then(res => res.json())
-    .then(data => CompanyList = data);
+    .then(data => CompanyList = data)
+    .then(cb);
 
   console.log('getNames: CompanyList', CompanyList);
 }
@@ -291,6 +287,7 @@ function getHistorical() {
 
     // get yesterday
     res.data[0].forEach((row) => {
+      nameList[row[0]] = true;
       const openClose = row.slice(1);
       openClose.push(openClose[1] / openClose[0]);
       HistoricalMap.yesterday[row[0]] = openClose;
@@ -298,6 +295,7 @@ function getHistorical() {
 
     // get month
     res.data[1].forEach((row) => {
+      nameList[row[0]] = true;
       const openClose = row.slice(1);
       openClose.push(openClose[1] / openClose[0]);
       HistoricalMap.month[row[0]] = openClose;
@@ -305,12 +303,18 @@ function getHistorical() {
 
     // get year
     res.data[2].forEach((row) => {
+      nameList[row[0]] = true;
       const openClose = row.slice(1);
       openClose.push(openClose[1] / openClose[0]);
       HistoricalMap.year[row[0]] = openClose;
     });
 
-    getNames();
+    getNames(function(){
+      loadTemplates();
+      shufflePhrases();
+      nextRound();
+      render();
+     });
   });
 
   console.log('getHistorical: HistoricalMap', HistoricalMap);
@@ -323,10 +327,4 @@ function shufflePhrases() {
   }
 }
 
-$(() => {
-  getHistorical();
-  loadTemplates();
-  shufflePhrases();
-  nextRound();
-  render();
-});
+getHistorical();
