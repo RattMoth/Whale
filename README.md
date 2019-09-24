@@ -4,7 +4,11 @@ Let's start with some [reading background](https://www.raphkoster.com/gaming/gdc
 
 This game works off of an SQLite database which gets set up automatically by running `api/update.py`, which "updates" to the schema  found in `api/db.py` and then gets recent quotes to populate it.
 
-Before you proceed however, you'll need [redis](https://redis.io) which maintains an http cache of the api results so we don't need to hit the server each time. 
+Before you proceed however, you'll need [redis](https://redis.io) which maintains an http cache of the API results so we don't need to hit the server each time:
+
+```
+ $ sudo apt install redis-server
+```
 
 After that's installed and running you can run update.py as many times as you need. It won't put in duplicate records and the caching system will prevent you from naively hitting the api quota.
 
