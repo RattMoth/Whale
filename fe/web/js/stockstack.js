@@ -275,7 +275,15 @@ function getNames(cb) {
     body: JSON.stringify(Object.keys(nameList)),
   })
     .then(res => res.json())
-    .then(data => CompanyList = data)
+    .then((data) => {
+      // group companies together
+      for (let i = 0; i < data.length; i += 2) {
+        data[i] = [data[i], data[i + 1]];
+      }
+      // remove ungrouped indexes
+      const filtered = data.filter((v, i) => i % 2 === 0);
+      CompanyList = filtered;
+    })
     .then(cb);
 
   console.log('getNames: CompanyList', CompanyList);
