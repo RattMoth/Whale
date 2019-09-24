@@ -10,7 +10,7 @@ Before you proceed however, you'll need [redis](https://redis.io) which maintain
  $ sudo apt install redis-server
 ```
 
-After that's installed and running you can run update.py as many times as you need. It won't put in duplicate records and the caching system will prevent you from naively hitting the api quota.
+After that's installed and running you can run `update.py` as many times as you need. It won't put in duplicate records and the caching system will prevent you from naively hitting the api quota.
 
 After this is done. You can run server.py, which has the executable bit set:
 
@@ -18,7 +18,7 @@ After this is done. You can run server.py, which has the executable bit set:
  $ ./server.py
 ```
 
-Currently the html game uses `document.location.host + :4100` to look up the server.  You'll have to separately host the game on something like apache, nginx or you can run `python3 -m http.server` in the `fe/web` directory to server it on port 8000
+Currently the html game uses `document.location.host + :4100` to look up the server.  You'll have to separately host the game on something like apache, nginx or you can run `python3 -m http.server` in the `fe/web` directory to server it on port 8000.
 
 ### Design
 
