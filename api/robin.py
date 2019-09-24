@@ -205,7 +205,16 @@ def positions():
 
   return {'computed': computed, 'positions': positionList }
 
-def get_yesterday(fields = '*'):
-  return db.run('select {} from historical group by ticker order by begin desc'.format(fields)).fetchall()
+def get_dates(fields = '*'):
+  yesterday =  db.run(f"SELECT {fields} FROM historical WHERE begin = strftime('%Y-%m-%d', 'now', '-1 day') GROUP BY ticker ORDER BY begin DESC").fetchall()
+  
+  month = db.run(f"SELECT {fields} FROM historical WHERE begin BETWEEN strftime('%Y-%m-%d', 'now', 'start of month', '-1 month') AND strftime('%Y-%m-%d', 'now', 'start of month', '-1 month', '+7 days') GROUP BY ticker ORDER BY begin desc").fetchall()
+  
+  year = db.run(f"SELECT {fields} FROM historical WHERE begin BETWEEN strftime('%Y-%m-%d', 'now', 'start of month', '-1 year') AND strftime('%Y-%m-%d', 'now', 'start of month', '-1 year', '+7 days') GROUP BY ticker ORDER BY begin DESC").fetchall()
 
+  return(yesterday, month, year)
 
+def get_names(nameList):
+  for nameArr in nameList:
+    nameArr.insert(1, lib.ticker2name(nameArr[0]))
+  return nameList

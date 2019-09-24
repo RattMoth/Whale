@@ -3,9 +3,14 @@ let trash = [];
 let stash = [];
 let chooser;
 let Streak = 0;
-const ZeroTime = 3;
+const ZeroTime = 10;
 let time_between = ZeroTime;
-const HistoricalMap = {};
+let timeframe = 'year';
+const HistoricalMap = {
+  yesterday: [],
+  month: [],
+  year: [],
+};
 const Game = {
   round: -1,
 };
@@ -39,21 +44,27 @@ const phrases = {
   ],
 };
 const ev = EvDa();
-const CompanyList = [
-  [['AAPL', 'Apple'], ['MSFT', 'Microsoft']],
-  [['SNAP', 'Snapchat'], ['FB', 'Facebook']],
-  [['PEP', 'Pepsi'], ['KO', 'Coke']],
-  [['TSLA', 'Tesla'], ['XOM', 'Exxon Mobil']],
-  [['AMZN', 'Amazon'], ['WMT', 'Walmart']],
+let CompanyList = [];
+// const CompanyList = [
+//   [['TWTR', 'Twitter'], ['SNAP', 'Snapchat']],
+//   [['VZ', 'Verizon'], ['PLNT', 'Planet Fitness']],
+//   [['DIS', 'Disney'], ['V', 'Visa']],
+//   [['GRPN', 'Groupon'], ['WMT', 'Walmart']],
+//   [['TSLA', 'Tesla'], ['PYPL', 'PayPal']],
+//   [['AAPL', 'Apple'], ['MSFT', 'Microsoft']],
+//   [['SNAP', 'Snapchat'], ['FB', 'Facebook']],
+//   [['PEP', 'Pepsi'], ['KO', 'Coke']],
+//   [['TSLA', 'Tesla'], ['XOM', 'Exxon Mobil']],
+//   [['AMZN', 'Amazon'], ['WMT', 'Walmart']],
 
-  // Maybe not disney?
-  [['NFLX', 'Netflix'], ['DIS', 'Disney']],
+//   // Maybe not disney?
+//   [['NFLX', 'Netflix'], ['DIS', 'Disney']],
 
-  // A better one for the goog would be nice.
-  [['GOOG', 'Google'], ['BIDU', 'Baidu']],
-  [['V', 'Visa'], ['PYPL', 'PayPal']],
-  [['PM', 'Philip Morris'], ['PLNT', 'Planet Fitness']],
-];
+//   // A better one for the goog would be nice.
+//   [['GOOG', 'Google'], ['BIDU', 'Baidu']],
+//   [['V', 'Visa'], ['PYPL', 'PayPal']],
+//   [['PM', 'Philip Morris'], ['PLNT', 'Planet Fitness']],
+// ];
 
 function iter(what) {
   phrases.index[what] = (phrases.index[what] + 1) % phrases[what].length;
@@ -119,15 +130,13 @@ function pick(index, which) {
   remove(CompanyList[index][0]);
   remove(CompanyList[index][1]);
 
-  const
-    stash_ix = which;
+  const stash_ix = which;
   const trash_ix = (which + 1) % 2;
 
-  const
-    chosen = CompanyList[index][stash_ix][0];
+  const chosen = CompanyList[index][stash_ix][0];
   const not_chosen = CompanyList[index][trash_ix][0];
 
-  if (HistoricalMap[chosen] > HistoricalMap[not_chosen]) {
+  if (HistoricalMap[timeframe][chosen][2] > HistoricalMap[timeframe][not_chosen][2]) {
     win();
   } else {
     lose();
@@ -155,22 +164,22 @@ function endGame() {
   );
   clearInterval(chooser);
   $('#timer').hide();
-  const max = Math.max.apply(0, Object.values(HistoricalMap).map(a => a[2]));
-  const min = Math.min.apply(0, Object.values(HistoricalMap).map(a => a[2]));
+  const max = Math.max.apply(0, Object.values(HistoricalMap[timeframe]).map(a => a[2]));
+  const min = Math.min.apply(0, Object.values(HistoricalMap[timeframe]).map(a => a[2]));
 
-  for (const ticker in HistoricalMap) {
-    const change = HistoricalMap[ticker][2];
+  for (const ticker in HistoricalMap[timeframe]) {
+    const change = HistoricalMap[timeframe][ticker][2];
     const perc = 100 * (max - change) / (max - min);
     $(`.performance.${ticker}`).html(Math.round(perc / 10));
-    HistoricalMap[ticker][3] = Math.round(perc / 10);
+    HistoricalMap[timeframe][ticker][3] = Math.round(perc / 10);
 
     console.log(change, perc, max, min);
     $(`.perf-container.${ticker} .waves`).css('height', `${perc}%`);
     $(`.perf-container.${ticker} .performance`).css('bottom', 0`${0.25 + 0.5 * perc}%`);
   }
 
-  const stashTotal = stash.reduce((ix, row) => HistoricalMap[row[0]][3] + ix, 0);
-  const trashTotal = trash.reduce((ix, row) => HistoricalMap[row[0]][3] + ix, 0);
+  const stashTotal = stash.reduce((ix, row) => HistoricalMap[timeframe][row[0]][3] + ix, 0);
+  const trashTotal = trash.reduce((ix, row) => HistoricalMap[timeframe][row[0]][3] + ix, 0);
   $('.performance.stash').html(stashTotal);
   $('.performance.trash').html(trashTotal);
   $('.performance.final').html(stashTotal - trashTotal);
@@ -189,6 +198,20 @@ function nextRound() {
     return false;
   }
   Game.round += 1;
+
+  // Increase difficulty to month
+  if (Game.round === 3) {
+    timeframe = 'month';
+    $('#didBetter').html('Which stock did better last month?');
+    console.log('timeframe changed to month');
+  }
+
+  // Increase difficulty to year
+  if (Game.round === 6) {
+    timeframe = 'yesterday';
+    $('#didBetter').html('What about yesterday?');
+    console.log('timeframe changed to yesterday');
+  }
 
   if (Game.round >= CompanyList.length) {
     return endGame();
@@ -228,29 +251,69 @@ function get(url, cb) {
   const http = new XMLHttpRequest();
 
   // Gets hostname and removes port
-  const hostname = document.location.host.replace(/:\d{4}/, '') || "localhost";
+  const hostname = document.location.host.replace(/:\d{4}/, '') || 'localhost';
 
   http.open('GET', `http://${hostname}:4001/${url}`, true);
   http.setRequestHeader('Content-type', 'application/json');
 
   http.onreadystatechange = function () {
-    if (http.readyState == 4 && http.status == 200) {
+    if (http.readyState === 4 && http.status === 200) {
       cb(http.responseText);
     }
   };
   http.send();
 }
 
-function getYesterday() {
-  get('yesterday', (data) => {
+function getNames() {
+  const tickerList = [];
+  const hostname = document.location.host.replace(/:\d{4}/, '') || 'localhost';
+
+  for (const ticker in HistoricalMap.year) {
+    if (ticker !== undefined) {
+      tickerList.push([ticker]);
+    }
+  }
+
+  fetch(`http://${hostname}:4001/names`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(tickerList),
+  })
+    .then(res => res.json())
+    .then(data => CompanyList = data);
+
+  console.log('getNames: CompanyList', CompanyList);
+}
+
+function getHistorical() {
+  get('dates', (data) => {
     const res = JSON.parse(data);
-    res.data.forEach((row) => {
+
+    // get yesterday
+    res.data[0].forEach((row) => {
       const openClose = row.slice(1);
       openClose.push(openClose[1] / openClose[0]);
-      HistoricalMap[row[0]] = openClose;
+      HistoricalMap.yesterday[row[0]] = openClose;
     });
-    console.log(HistoricalMap);
+
+    // get month
+    res.data[1].forEach((row) => {
+      const openClose = row.slice(1);
+      openClose.push(openClose[1] / openClose[0]);
+      HistoricalMap.month[row[0]] = openClose;
+    });
+
+    // get year
+    res.data[2].forEach((row) => {
+      const openClose = row.slice(1);
+      openClose.push(openClose[1] / openClose[0]);
+      HistoricalMap.year[row[0]] = openClose;
+    });
+
+    getNames();
   });
+
+  console.log('getHistorical: HistoricalMap', HistoricalMap);
 }
 
 function shufflePhrases() {
@@ -261,7 +324,7 @@ function shufflePhrases() {
 }
 
 $(() => {
-  getYesterday();
+  getHistorical();
   loadTemplates();
   shufflePhrases();
   nextRound();
