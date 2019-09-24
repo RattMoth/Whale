@@ -1,5 +1,7 @@
 ### Setting up
 
+Let's start with some [reading background](https://www.raphkoster.com/gaming/gdco12/Koster_Raph_Theory_Fun_10.pdf) to understand what we're dealing with.
+
 This game works off of an SQLite database which gets set up automatically by running `api/update.py`, which "updates" to the schema  found in `api/db.py` and then gets recent quotes to populate it.
 
 Before you proceed however, you'll need [redis](https://redis.io) which maintains an http cache of the api results so we don't need to hit the server each time. 
