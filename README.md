@@ -1,10 +1,17 @@
 ### Setting up
 
+Let's start with some [reading background](https://www.raphkoster.com/gaming/gdco12/Koster_Raph_Theory_Fun_10.pdf) to understand what we're dealing with.
+
 This game works off of an SQLite database which gets set up automatically by running `api/update.py`, which "updates" to the schema  found in `api/db.py` and then gets recent quotes to populate it.
 
-Before you proceed however, you'll need [redis](https://redis.io) which maintains an http cache of the api results so we don't need to hit the server each time. Once redis is installed, run `redis-server` in a terminal to get the server up and running.
 
-After that's installed and running you can run update.py as many times as you need. It won't put in duplicate records and the caching system will prevent you from naively hitting the api quota.
+Before you proceed however, you'll need [redis](https://redis.io) which maintains an http cache of the API results so we don't need to hit the server each time:
+
+```
+ $ sudo apt install redis-server
+```
+
+After that's installed and running you can run `update.py` as many times as you need. It won't put in duplicate records and the caching system will prevent you from naively hitting the api quota.
 
 After this is done. You can run `api/server.py`, which has the executable bit set:
 
@@ -12,7 +19,7 @@ After this is done. You can run `api/server.py`, which has the executable bit se
  $ ./server.py
 ```
 
-Currently the html game uses `document.location.host + :4100` to look up the server.  You'll have to separately host the game on something like apache, nginx or you can run `python3 -m http.server` in the `fe/web` directory to server it on port 8000
+Currently the html game uses `document.location.host + :4100` to look up the server.  You'll have to separately host the game on something like apache, nginx or you can run `python3 -m http.server` in the `fe/web` directory to server it on port 8000.
 
 ### Design
 
