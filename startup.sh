@@ -1,2 +1,3 @@
 #!/bin/bash
-api/server.py
+api/server.py &
+xdg-open $PWD/fe/web/stockstack.html
