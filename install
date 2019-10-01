@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo apt install redis-server sqlite3
 cd api
 pip3 install -r requirements.txt
 
+[[ -e trades.db ]] || gunzip -c trades.db.gz 
