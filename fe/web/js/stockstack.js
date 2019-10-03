@@ -201,14 +201,14 @@ function nextRound() {
   Game.round += 1;
 
   // Increase difficulty to month
-  if (Game.round === 3) {
+  if (Game.round === 14) {
     timeframe = 'month';
     $('#didBetter').html('Which stock did better last month?');
     console.log('timeframe changed to month');
   }
 
-  // Increase difficulty to year
-  if (Game.round === 6) {
+  // Increase difficulty to yesterday
+  if (Game.round === 28) {
     timeframe = 'yesterday';
     $('#didBetter').html('What about yesterday?');
     console.log('timeframe changed to yesterday');
@@ -277,12 +277,11 @@ function getNames(cb) {
     .then(res => res.json())
     .then((data) => {
       // group companies together
-      for (let i = 0; i < data.length; i += 2) {
+      for (let i = 0; i < data.length; i++) {
         data[i] = [data[i], data[i + 1]];
+        data.splice(i + 1, 1);
       }
-      // remove ungrouped indexes
-      const filtered = data.filter((v, i) => i % 2 === 0);
-      CompanyList = filtered;
+      CompanyList = data;
     })
     .then(cb);
 
@@ -317,12 +316,12 @@ function getHistorical() {
       HistoricalMap.year[row[0]] = openClose;
     });
 
-    getNames(function(){
+    getNames(() => {
       loadTemplates();
       shufflePhrases();
       nextRound();
       render();
-     });
+    });
   });
 
   console.log('getHistorical: HistoricalMap', HistoricalMap);

@@ -19,6 +19,7 @@ alpha.historical([
   "JNJ",
   "MMM",
   "UBER",
+  "SFIX",
 
   "AAPL","MSFT","SNAP","FB","PEP","KO","TSLA","XOM","AMZN","WMT","NFLX","DIS","GOOG","BIDU","V","PYPL","PM","PLNT"])
 
