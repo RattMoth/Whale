@@ -4,23 +4,22 @@ body {
 }
 
 @keyframes scrollLeft {
-  from { background-position: 9000px; }
-  to { background-position: 0px; }
+  100% { 
+    transform: translateX(-200%)
+  }
 }
 
 @-webkit-keyframes scrollLeft {
-  from { background-position: 9000px; }
-  to { background-position: 0px; } 
-}
-
-@keyframes foregroundScroll {
-  from{ transform: translateX(0vw)}
-  to { transform: translateX(99vw)}
+  100% { 
+    -webkit-transform: translateX(-200%)
+  }
 }
 
 .ocean-bg {
   background-image: url('../background-images/ocean-repeat.png');
+  background-size: auto 100vh;
   background-repeat: repeat-x;
+  transform: translate3d(0, 0, 0);
   animation: scrollLeft 1000s infinite linear;
   -webkit-animation: scrollLeft 1000s infinite linear;
   width: 100vw;
@@ -31,7 +30,9 @@ body {
 
 .ocean-front {
   background: url('../background-images/seafloor.svg') bottom right;
+  background-size: 100vw 70vh;
   background-repeat: repeat-x;
+  transform: translate3d(0, 0, 0);
   animation: scrollLeft 300s infinite linear;
   -webkit-animation: scrollLeft 300s infinite linear;
   position: absolute;
