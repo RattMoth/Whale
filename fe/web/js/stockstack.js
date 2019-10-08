@@ -6,7 +6,7 @@ let Streak = 0;
 const ZeroTime = 10;
 let time_between = ZeroTime;
 let timeframe = 'year';
-let nameList = {};
+const nameList = {};
 const HistoricalMap = {
   yesterday: [],
   month: [],
@@ -126,6 +126,19 @@ function lose() {
   time_between = ZeroTime;
   Streak = 0;
 }
+
+function getHistMapIX(searchVal) {
+  // Used to find HistoricalMap index containing selected stock ticker
+
+  let histMapIX = 0;
+
+  while (HistoricalMap[timeframe][histMapIX].findIndex(ix => ix === searchVal) === -1) {
+    histMapIX++;
+  }
+
+  return histMapIX;
+}
+
 function pick(index, which) {
   // make sure they are out of the list
   remove(CompanyList[index][0]);
@@ -137,7 +150,7 @@ function pick(index, which) {
   const chosen = CompanyList[index][stash_ix][0];
   const not_chosen = CompanyList[index][trash_ix][0];
 
-  if (HistoricalMap[timeframe][chosen][2] > HistoricalMap[timeframe][not_chosen][2]) {
+  if (HistoricalMap[timeframe][getHistMapIX(chosen)][3] > HistoricalMap[timeframe][getHistMapIX(not_chosen)][3]) {
     win();
   } else {
     lose();
@@ -201,14 +214,14 @@ function nextRound() {
   Game.round += 1;
 
   // Increase difficulty to month
-  if (Game.round === 14) {
+  if (Game.round === 7) {
     timeframe = 'month';
     $('#didBetter').html('Which stock did better last month?');
     console.log('timeframe changed to month');
   }
 
   // Increase difficulty to yesterday
-  if (Game.round === 28) {
+  if (Game.round === 14) {
     timeframe = 'yesterday';
     $('#didBetter').html('What about yesterday?');
     console.log('timeframe changed to yesterday');
@@ -291,37 +304,37 @@ function getNames(cb) {
 function getHistorical() {
   get('dates', (data) => {
     const res = JSON.parse(data);
-    var ref = {};
+    let ref = {};
 
     // get yesterday
     res.data.yesterday.forEach((row) => {
       console.log(row);
-      var name = row[0];
+      let name = row[0];
       nameList[name] = true;
       const openClose = row.slice(1);
       openClose.push(openClose[1] / openClose[0]);
       ref[name] = openClose[1];
       HistoricalMap.yesterday.push([
-        name, row.slice(1), openClose, openClose[1] / openClose[0]
+        name, row.slice(1), openClose, openClose[1] / openClose[0],
       ]);
     });
 
     // get month
-    ['decade','year','month'].forEach((unit) => {
+    ['decade', 'year', 'month'].forEach((unit) => {
       HistoricalMap[unit] = [];
       res.data[unit].forEach((row) => {
-        var name = row[0];
+        let name = row[0];
         const openClose = row.slice(1);
         openClose.push(openClose[1] / openClose[0]);
         HistoricalMap[unit].push([
-          name, row.slice(1), openClose, ref[name] / openClose[0]
+          name, row.slice(1), openClose, ref[name] / openClose[0],
         ]);
       });
     });
 
     self.a = [];
-    ['yesterday','month','year','decade'].forEach(row => {
-      a.push(HistoricalMap[row].sort(function(a,b) {
+    ['yesterday', 'month', 'year', 'decade'].forEach((row) => {
+      a.push(HistoricalMap[row].sort((a,b) => {
         return (b[3] - a[3]);
       }));
       console.log(row);
