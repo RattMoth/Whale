@@ -1,4 +1,11 @@
-### Setting up
+### Super simple setup.
+
+There's two files:
+
+ * ./install.sh - this installs things
+ * ./startup.sh - this runs the server and opens the browser
+
+### Setting up, not so simple (if the above 'esplodes)
 
 Let's start with some [reading background](https://www.raphkoster.com/gaming/gdco12/Koster_Raph_Theory_Fun_10.pdf) to understand what we're dealing with.
 
