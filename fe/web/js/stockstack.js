@@ -290,7 +290,9 @@ function getHistorical() {
       nameList[row[0]] = true;
       const openClose = row.slice(1);
       openClose.push(openClose[1] / openClose[0]);
-      HistoricalMap.yesterday[row[0]] = openClose;
+      HistoricalMap.yesterday.push([
+        row[0], row.slice(1), openClose, openClose[1] / openClose[0]
+      ]);
     });
 
     // get month
@@ -298,7 +300,9 @@ function getHistorical() {
       nameList[row[0]] = true;
       const openClose = row.slice(1);
       openClose.push(openClose[1] / openClose[0]);
-      HistoricalMap.month[row[0]] = openClose;
+      HistoricalMap.month.push([
+        row[0], row.slice(1), openClose, openClose[1] / openClose[0]
+      ]);
     });
 
     // get year
@@ -306,7 +310,17 @@ function getHistorical() {
       nameList[row[0]] = true;
       const openClose = row.slice(1);
       openClose.push(openClose[1] / openClose[0]);
-      HistoricalMap.year[row[0]] = openClose;
+      HistoricalMap.year.push([
+        row[0], row.slice(1), openClose, openClose[1] / openClose[0]
+      ]);
+    });
+
+    self.a = [];
+    ['yesterday','month','year'].forEach(row => {
+      a.push(HistoricalMap[row].sort(function(a,b) {
+        return (b[3] - 1) - (a[3] - 1);
+      }));
+      console.log(row);
     });
 
     getNames(function(){
