@@ -207,9 +207,10 @@ def positions():
 
 def get_dates(fields = '*'):
   return {
-    'yesterday': db.run(f"SELECT max(begin),{fields} FROM historical GROUP BY ticker ORDER BY begin DESC").fetchall(),
-    'month': db.run(f"SELECT min(begin),{fields} FROM historical WHERE begin > strftime('%Y-%m-%d', 'now', '-1 month') GROUP BY ticker").fetchall(),
-    'year': db.run(f"SELECT min(begin),{fields} FROM historical WHERE begin > strftime('%Y-%m-%d', 'now', '-1 year') GROUP BY ticker").fetchall()
+    'yesterday': db.run(f"SELECT {fields},max(begin) FROM historical GROUP BY ticker ORDER BY begin DESC").fetchall(),
+    'month': db.run(f"SELECT {fields},min(begin) FROM historical WHERE begin > strftime('%Y-%m-%d', 'now', '-1 month') GROUP BY ticker").fetchall(),
+    'year': db.run(f"SELECT {fields},min(begin) FROM historical WHERE begin > strftime('%Y-%m-%d', 'now', '-1 year') GROUP BY ticker").fetchall(),
+    'decade': db.run(f"SELECT {fields},min(begin) FROM historical WHERE begin > strftime('%Y-%m-%d', 'now', '-10 year') GROUP BY ticker").fetchall()
   }
 
 

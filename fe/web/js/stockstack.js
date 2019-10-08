@@ -291,41 +291,38 @@ function getNames(cb) {
 function getHistorical() {
   get('dates', (data) => {
     const res = JSON.parse(data);
+    var ref = {};
 
     // get yesterday
-    res.data[0].forEach((row) => {
-      nameList[row[0]] = true;
+    res.data.yesterday.forEach((row) => {
+      console.log(row);
+      var name = row[0];
+      nameList[name] = true;
       const openClose = row.slice(1);
       openClose.push(openClose[1] / openClose[0]);
+      ref[name] = openClose[1];
       HistoricalMap.yesterday.push([
-        row[0], row.slice(1), openClose, openClose[1] / openClose[0]
+        name, row.slice(1), openClose, openClose[1] / openClose[0]
       ]);
     });
 
     // get month
-    res.data[1].forEach((row) => {
-      nameList[row[0]] = true;
-      const openClose = row.slice(1);
-      openClose.push(openClose[1] / openClose[0]);
-      HistoricalMap.month.push([
-        row[0], row.slice(1), openClose, openClose[1] / openClose[0]
-      ]);
-    });
-
-    // get year
-    res.data[2].forEach((row) => {
-      nameList[row[0]] = true;
-      const openClose = row.slice(1);
-      openClose.push(openClose[1] / openClose[0]);
-      HistoricalMap.year.push([
-        row[0], row.slice(1), openClose, openClose[1] / openClose[0]
-      ]);
+    ['decade','year','month'].forEach((unit) => {
+      HistoricalMap[unit] = [];
+      res.data[unit].forEach((row) => {
+        var name = row[0];
+        const openClose = row.slice(1);
+        openClose.push(openClose[1] / openClose[0]);
+        HistoricalMap[unit].push([
+          name, row.slice(1), openClose, ref[name] / openClose[0]
+        ]);
+      });
     });
 
     self.a = [];
-    ['yesterday','month','year'].forEach(row => {
+    ['yesterday','month','year','decade'].forEach(row => {
       a.push(HistoricalMap[row].sort(function(a,b) {
-        return (b[3] - 1) - (a[3] - 1);
+        return (b[3] - a[3]);
       }));
       console.log(row);
     });
