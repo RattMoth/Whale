@@ -206,14 +206,12 @@ def positions():
   return {'computed': computed, 'positions': positionList }
 
 def get_dates(fields = '*'):
-  yesterday = db.run(f"SELECT {fields} FROM historical WHERE begin = strftime('%Y-%m-%d', 'now', '-1 day') GROUP BY ticker ORDER BY begin DESC").fetchall()
-  
-  month = db.run(f"SELECT {fields} FROM historical WHERE begin BETWEEN strftime('%Y-%m-%d', 'now', 'start of month', '-1 month') AND strftime('%Y-%m-%d', 'now', 'start of month', '-1 month', '+7 days') GROUP BY ticker ORDER BY begin desc").fetchall()
-  
-  straa = "SELECT {fields} FROM historical WHERE begin BETWEEN strftime('%Y-%m-%d', 'now', 'start of month', '-1 year') AND strftime('%Y-%m-%d', 'now', 'start of month', '+7 days') GROUP BY ticker ORDER BY begin DESC"
-  year = db.run(f"SELECT {fields} FROM historical WHERE begin BETWEEN strftime('%Y-%m-%d', 'now', 'start of month', '-1 year') AND strftime('%Y-%m-%d', 'now', 'start of month', '+7 days') GROUP BY ticker ORDER BY begin DESC").fetchall()
+  return {
+    'yesterday': db.run(f"SELECT max(begin),{fields} FROM historical GROUP BY ticker ORDER BY begin DESC").fetchall(),
+    'month': db.run(f"SELECT min(begin),{fields} FROM historical WHERE begin > strftime('%Y-%m-%d', 'now', '-1 month') GROUP BY ticker").fetchall(),
+    'year': db.run(f"SELECT min(begin),{fields} FROM historical WHERE begin > strftime('%Y-%m-%d', 'now', '-1 year') GROUP BY ticker").fetchall()
+  }
 
-  return(yesterday, month, year, straa)
 
 # get_names = lambda nameList: [ lib.ticker2name(x) for x in nameList ]
 
