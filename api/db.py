@@ -206,7 +206,8 @@ def insert(table, data):
     res, last = run(qstr, values, with_last = True)
 
   except:
-    print(["Unable to insert a record", qstr, values])
+    #print(["Unable to insert a record", qstr, values])
+    pass
 
   return last
 

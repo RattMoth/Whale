@@ -43,7 +43,7 @@ def cache_get(url, force = False, wait_until = False):
     req  = urllib.request.Request(url)
 
     with urllib.request.urlopen(req) as response:
-      r.set(key, response.read(), 60 * 60 * 12)
+      r.set(key, response.read(), 60 * 60 * 24 * 30)
 
   return r.get(key)
   
