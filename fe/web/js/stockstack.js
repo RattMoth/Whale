@@ -7,6 +7,8 @@ const ZeroTime = 10;
 let time_between = ZeroTime;
 let timeframe = 'year';
 const nameList = {};
+var CompanyMap = {};
+var cardDeck = [];
 const HistoricalMap = {
   yesterday: [],
   month: [],
@@ -45,8 +47,8 @@ const phrases = {
   ],
 };
 const ev = EvDa();
-let CompanyList = [];
-// const CompanyList = [
+//let cardDeck = [];
+// const cardDeck = [
 //   [['TWTR', 'Twitter'], ['SNAP', 'Snapchat']],
 //   [['VZ', 'Verizon'], ['PLNT', 'Planet Fitness']],
 //   [['DIS', 'Disney'], ['V', 'Visa']],
@@ -122,7 +124,8 @@ function win() {
   time_between *= 0.9;
   Streak++;
 }
-function lose() {
+function lose(chosen, notchosen) {
+  console.log(notchosen.gain, chosen.gain, Math.round((notchosen.gain / chosen.gain - 1) * 100));
   time_between = ZeroTime;
   Streak = 0;
 }
@@ -141,20 +144,16 @@ function getHistMapIX(searchVal) {
 
 function pick(index, which) {
   // make sure they are out of the list
-  remove(CompanyList[index][0]);
-  remove(CompanyList[index][1]);
-
   const stash_ix = which;
   const trash_ix = (which + 1) % 2;
 
-  const chosen = CompanyList[index][stash_ix][0];
-  const not_chosen = CompanyList[index][trash_ix][0];
+  const chosen = cardDeck[index].round[stash_ix];
+  const notchosen = cardDeck[index].round[trash_ix];
 
-  if (HistoricalMap[timeframe][getHistMapIX(chosen)][3] > HistoricalMap[timeframe][getHistMapIX(not_chosen)][3]) {
-    win();
-  } else {
-    lose();
-  }
+  remove(chosen);
+  remove(notchosen);
+
+  return chosen.gain > notchosen.gain ? win() : lose(chosen, notchosen);
 }
 
 function relative_percent(what) {
@@ -212,22 +211,9 @@ function nextRound() {
     return false;
   }
   Game.round += 1;
+  $("#term").html(cardDeck[Game.round].term + "?");
 
-  // Increase difficulty to month
-  if (Game.round === 7) {
-    timeframe = 'month';
-    $('#didBetter').html('Which stock did better last month?');
-    console.log('timeframe changed to month');
-  }
-
-  // Increase difficulty to yesterday
-  if (Game.round === 14) {
-    timeframe = 'yesterday';
-    $('#didBetter').html('What about yesterday?');
-    console.log('timeframe changed to yesterday');
-  }
-
-  if (Game.round >= CompanyList.length) {
+  if (Game.round >= cardDeck.length) {
     return endGame();
   }
 
@@ -248,7 +234,7 @@ function nextRound() {
   }, 1000);
 
   $('#choice-container').html(
-    Template.choice({ ix: Game.round, choice: CompanyList[Game.round] }),
+    Template.choice({ ix: Game.round, choice: cardDeck[Game.round].round }),
   );
   return true;
 }
@@ -289,16 +275,32 @@ function getNames(cb) {
   })
     .then(res => res.json())
     .then((data) => {
-      // group companies together
-      for (let i = 0; i < data.length; i++) {
-        data[i] = [data[i], data[i + 1]];
-        data.splice(i + 1, 1);
-      }
-      CompanyList = data;
+      data.forEach(row => { CompanyMap[row[0]] = row[1]; });
     })
     .then(cb);
+}
 
-  console.log('getNames: CompanyList', CompanyList);
+function row2card(row){
+  return {
+    ticker: row[0],
+    name: CompanyMap[row[0]],
+    gain: row[3]
+  };
+}
+
+function setupGame() { 
+  ['decade','year','month','yesterday'].forEach(row => {
+    var cards = HistoricalMap[row].slice();
+    while(cards.length > 2) {
+      cardDeck.push({
+        round: shuffle([
+          row2card(cards.shift()), 
+          row2card(cards.pop())
+        ]),
+        term: row
+      });
+    }
+  });
 }
 
 function getHistorical() {
@@ -341,6 +343,7 @@ function getHistorical() {
     });
 
     getNames(() => {
+      setupGame();
       loadTemplates();
       shufflePhrases();
       nextRound();

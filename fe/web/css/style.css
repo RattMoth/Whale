@@ -258,3 +258,8 @@ circle {
   border-radius: 2vw;
   text-align: center;
 }
+#term {
+  display: block;
+  text-transform: capitalize;
+  font-size: 2vw;
+}

@@ -17,7 +17,9 @@
     <div id="game-container">
 
       <div id="game">
-      <h2 id="didBetter">Which stock do you think did better last year?</h2>
+      <div id="streak-container"></div>
+      <div id="win">
+      </div>
       <div id=timer>
         <div id='counter'>
         </div>
@@ -27,9 +29,7 @@
       </div>
       <div id="choice-container">
       </div>
-      <div id="streak-container"></div>
-      <div id="win">
-      </div>
+        <h2 id="didBetter">What's done better in the last <span id='term'></span></h2>
       <div id="lose">
         <div id=lose-text></div>
         STARTING OVER!
@@ -47,13 +47,19 @@
       <script id='t-choice' type='text/template'>
         <div class='choice' onclick="choose(<%= ix %>, 0)">
           <div class='body'>
-          <h3><%= choice[0][1] %></h3>
+          <h3>
+            <%= choice[0].name %>
+            <small><%= choice[0].ticker %></small>
+          </h3>
           </div>
         </div>
 
         <div class='choice' onclick="choose(<%= ix %>, 1)">
           <div class='body'>
-          <h3><%= choice[1][1] %></h3>
+          <h3>
+            <%= choice[1].name %>
+            <small><%= choice[1].ticker %></small>
+          </h3>
           </div>
         </div>
       </script>
