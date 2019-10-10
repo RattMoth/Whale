@@ -8,18 +8,18 @@ alpha.historical(list(set([
   "F", "SPLS", "SIRI", "SQ", "CL"
   "GM", "FTR", "BABA", "NKE", "GIS",
   "WFC", "HRB", "PLUG", "GS", "LVS",
-  "V", "T", "LLY", "TWLO", "KSS",
+  "V", "T", "LLY", "TWLO", "KSS", "LYFT",
   "VZ", "CTL", "QCOM", "MS", "ETSY",
   "TWTR", "MAT", "ROKU", "AMGN", "AAL",
   "GE", "ULTA", "INTC", "LOW", "FL",
   "GRPN", "LULU", "AMD", "KHC", "MGM",
-  "PFE", "DPZ", "NVDA", "AXP", "M",
-  "CVX", "PCG", "C", "ATVI", "KR",
-  "JPM", "HCC", "HD", "EBAY", "HAL",
-  "JNJ", "FSLR", "DG", "DAL", "ACB",
-  "MMM", "FIT", "PG", "ZM", "HPQ",
-  "UBER", "GPRO", "ADBE", "TMUS",
-  "SFIX", "ZNGA", "CVS", "LUV",
+  "PFE", "DPZ", "NVDA", "AXP", "M", "IBM",
+  "CVX", "PCG", "C", "ATVI", "KR", "PINS",
+  "JPM", "HCC", "HD", "EBAY", "HAL", "TGT",
+  "JNJ", "FSLR", "DG", "DAL", "ACB", "DOW",
+  "MMM", "FIT", "PG", "ZM", "HPQ", "UPS",
+  "UBER", "GPRO", "ADBE", "TMUS", "WDC",
+  "SFIX", "ZNGA", "CVS", "LUV", "MET",
 
   "AAPL","MSFT","SNAP","FB","PEP","KO","TSLA","XOM","AMZN","WMT","NFLX","DIS","GOOG","BIDU","V","PYPL","PM","PLNT"])))
 

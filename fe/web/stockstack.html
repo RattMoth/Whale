@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Changa:200,400,600,800&display=swap" rel="stylesheet">
     <title>Stockpile! The fun stock picking game</title>
     <link rel="stylesheet" href="css/background-style.css"> 
     <link rel="stylesheet" href="css/style.css"> 
@@ -18,18 +18,15 @@
 
     <div id="game">
       <div id="stats-container">
-          <div id="streak-container"></div>
           <div id=timer>
-            <div id='counter'></div>
-            <svg height="100" width="100">
-              <circle stroke-width="3" cx="50" cy="50" r="40" fill="none" />
-            </svg>
+            <div id='progress'></div>
           </div>
+          <div id="lose-container">Get Some Fish!</div>
+          <div id="streak-container"></div>
       </div>
       
-      <div id="choice-container"></div>
       <h2 id="didBetter">What's done better in the last <span id='term'></span></h2>
-      <div id="win"></div>
+      <div id="choice-container"></div>
       <div id="lose">
         <div id=lose-text></div>
         STARTING OVER!
@@ -46,20 +43,18 @@
     <div id='template'>
       <script id='t-choice' type='text/template'>
         <div class='choice' onclick="choose(<%= ix %>, 0)">
+          <div class="win">+1</div>
           <div class='body'>
-          <h3>
-            <%= choice[0].name %>
-            <small style="display: block;"><%= choice[0].ticker %></small>
-          </h3>
+            <div class='name'><%= choice[0].name %></div>
+            <div class='ticker'><%= choice[0].ticker %></div>
           </div>
         </div>
 
         <div class='choice' onclick="choose(<%= ix %>, 1)">
+          <div class="win">+1</div>
           <div class='body'>
-          <h3>
-            <%= choice[1].name %>
-            <small style="display: block;"><%= choice[1].ticker %></small>
-          </h3>
+            <div class='name'><%= choice[1].name %></div>
+            <div class='ticker'><%= choice[1].ticker %></div>
           </div>
         </div>
       </script>
@@ -76,7 +71,7 @@
       </script>
     </div>
     
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src=https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js></script>
     <script src=js/evda.min.js></script>
     <script src=js/stockstack.js></script>

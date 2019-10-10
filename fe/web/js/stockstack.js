@@ -41,33 +41,11 @@ const phrases = {
     "I can do better and I don't have hands",
     'Your finger must have slipped',
     'Stop smoking the seaweed',
-    "My mom's a whale too",
     'You suck like my blowhole',
-    'I wish I could drown',
   ],
 };
 const ev = EvDa();
-//let cardDeck = [];
-// const cardDeck = [
-//   [['TWTR', 'Twitter'], ['SNAP', 'Snapchat']],
-//   [['VZ', 'Verizon'], ['PLNT', 'Planet Fitness']],
-//   [['DIS', 'Disney'], ['V', 'Visa']],
-//   [['GRPN', 'Groupon'], ['WMT', 'Walmart']],
-//   [['TSLA', 'Tesla'], ['PYPL', 'PayPal']],
-//   [['AAPL', 'Apple'], ['MSFT', 'Microsoft']],
-//   [['SNAP', 'Snapchat'], ['FB', 'Facebook']],
-//   [['PEP', 'Pepsi'], ['KO', 'Coke']],
-//   [['TSLA', 'Tesla'], ['XOM', 'Exxon Mobil']],
-//   [['AMZN', 'Amazon'], ['WMT', 'Walmart']],
-
-//   // Maybe not disney?
-//   [['NFLX', 'Netflix'], ['DIS', 'Disney']],
-
-//   // A better one for the goog would be nice.
-//   [['GOOG', 'Google'], ['BIDU', 'Baidu']],
-//   [['V', 'Visa'], ['PYPL', 'PayPal']],
-//   [['PM', 'Philip Morris'], ['PLNT', 'Planet Fitness']],
-// ];
+var isFirst = true;
 
 function iter(what) {
   phrases.index[what] = (phrases.index[what] + 1) % phrases[what].length;
@@ -76,16 +54,28 @@ function iter(what) {
 
 function render() {
   if (Streak > 0) {
-    $('#win').append('<div class="plus">+1</div>');
     $('.plus').on('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function () { $(this).css('display', 'none'); });
     $('#whale-speak').html(iter('complimentList'));
+  $('#streak-container').html(
+    (new Array(Streak).fill(0).map(row => "<img src=../../fish/scorefish.svg>")).join('')
+  );
   } else {
     $('#lose').addClass('lose');
     $('.lose').on('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function () { $(this).css('display', 'none'); });
     $('#whale-speak').html(iter('loseList'));
   }
+  if(Streak === 0) {
+    if(!isFirst) {
+      $("#lose-container").html('No fish 4 u!').slideDown();
+    }
+    $("#streak-container").slideUp();
+  }
+  if(Streak === 1) {
+    $("#lose-container").slideUp();
+    $("#streak-container").slideDown();
+  }
+  isFirst = false;
 
-  $('#streak-container').html(Streak);
 }
 
 function shuffle(array) {
@@ -217,21 +207,23 @@ function nextRound() {
     return endGame();
   }
 
-  let timer_ix = parseFloat(time_between.toFixed(1));
+  let timer_ix = parseFloat(time_between.toFixed(1)),
+    start = timer_ix,
+    delay = 30;
+
   if (chooser) {
     clearInterval(chooser);
   }
-  $('#counter').html(timer_ix);
   chooser = setInterval(() => {
-    timer_ix--;
-    $('#counter').html(timer_ix.toFixed(1));
+    $("#progress").css({width: (100 * timer_ix/start) + "%"});
+    timer_ix -= delay / 1000;
     if (timer_ix < 0) {
       clearInterval(chooser);
       lose();
       render();
       return nextRound();
     }
-  }, 1000);
+  }, delay);
 
   $('#choice-container').html(
     Template.choice({ ix: Game.round, choice: cardDeck[Game.round].round }),
