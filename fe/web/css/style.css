@@ -79,7 +79,7 @@ h4 {
   justify-content: center;
 }
 .choice h3 {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 700;
 }
 .choice h4 {
@@ -94,6 +94,25 @@ h4 {
 {
   color: white;
 }
+#stats-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.hideBoxes {
+  transition: 0.5s;
+  transform: scale(0.5);
+  opacity: 0;
+  height: 0;
+}
+
+#choice-container {
+  transition: 0.5s;
+}
+
 .stack-container, #game {
   float: left;
 }

@@ -16,20 +16,20 @@
     <div class="ocean-front"></div>
     <div id="game-container">
 
-      <div id="game">
-      <div id="streak-container"></div>
-      <div id="win">
+    <div id="game">
+      <div id="stats-container">
+          <div id="streak-container"></div>
+          <div id=timer>
+            <div id='counter'></div>
+            <svg height="100" width="100">
+              <circle stroke-width="3" cx="50" cy="50" r="40" fill="none" />
+            </svg>
+          </div>
       </div>
-      <div id=timer>
-        <div id='counter'>
-        </div>
-      <svg height="100" width="100">
-        <circle stroke-width="3" cx="50" cy="50" r="40" fill="none" />
-      </svg>
-      </div>
-      <div id="choice-container">
-      </div>
-        <h2 id="didBetter">What's done better in the last <span id='term'></span></h2>
+      
+      <div id="choice-container"></div>
+      <h2 id="didBetter">What's done better in the last <span id='term'></span></h2>
+      <div id="win"></div>
       <div id="lose">
         <div id=lose-text></div>
         STARTING OVER!
@@ -49,7 +49,7 @@
           <div class='body'>
           <h3>
             <%= choice[0].name %>
-            <small><%= choice[0].ticker %></small>
+            <small style="display: block;"><%= choice[0].ticker %></small>
           </h3>
           </div>
         </div>
@@ -58,7 +58,7 @@
           <div class='body'>
           <h3>
             <%= choice[1].name %>
-            <small><%= choice[1].ticker %></small>
+            <small style="display: block;"><%= choice[1].ticker %></small>
           </h3>
           </div>
         </div>
