@@ -56,9 +56,9 @@ function render() {
   if (Streak > 0) {
     $('.plus').on('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function () { $(this).css('display', 'none'); });
     $('#whale-speak').html(iter('complimentList'));
-  $('#streak-container').html(
-    (new Array(Streak).fill(0).map(row => "<img src=../../fish/scorefish.svg>")).join('')
-  );
+    $('#streak-container').html(
+      (new Array(Streak).fill(0).map(row => '<img src=../../fish/scorefish.svg>')).join('')
+    );
   } else {
     $('#lose').addClass('lose');
     $('.lose').on('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function () { $(this).css('display', 'none'); });
@@ -66,16 +66,18 @@ function render() {
   }
   if(Streak === 0) {
     if(!isFirst) {
-      $("#lose-container").html('No fish 4 u!').slideDown();
+      $("#lose-container").html('No fish 4 u!');
     }
-    $("#streak-container").slideUp();
+    $("#streak-container").children().fadeOut('slow', () => {
+      $('#streak-container').slideUp();
+      $("#lose-container").slideDown();
+    });
   }
   if(Streak === 1) {
     $("#lose-container").slideUp();
     $("#streak-container").slideDown();
   }
   isFirst = false;
-
 }
 
 function shuffle(array) {
@@ -201,7 +203,7 @@ function nextRound() {
     return false;
   }
   Game.round += 1;
-  $("#term").html(cardDeck[Game.round].term + "?");
+  $('#term').html(cardDeck[Game.round].term + '?');
 
   if (Game.round >= cardDeck.length) {
     return endGame();
@@ -215,7 +217,7 @@ function nextRound() {
     clearInterval(chooser);
   }
   chooser = setInterval(() => {
-    $("#progress").css({width: (100 * timer_ix/start) + "%"});
+    $('#progress').css({width: (100 * timer_ix/start) + '%'});
     timer_ix -= delay / 1000;
     if (timer_ix < 0) {
       clearInterval(chooser);
